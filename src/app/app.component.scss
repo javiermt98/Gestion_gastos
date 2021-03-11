@@ -23,7 +23,7 @@ ion-menu.md ion-note {
 }
 
 ion-menu.md ion-list#inbox-list {
-  border-bottom: 1px solid var(--ion-color-step-150, #d7d8da);
+  border-bottom: 1px solid var(--ion-color-step-150, #ffffff);
 }
 
 ion-menu.md ion-list#inbox-list ion-list-header {
@@ -109,7 +109,7 @@ ion-menu.ios ion-note {
 
 ion-note {
   display: inline-block;
-  font-size: 16px;
+  font-size: 24px;
 
   color: var(--ion-color-medium-shade);
 }
