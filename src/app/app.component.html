@@ -3,8 +3,8 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Cuenta Principal</ion-list-header>
-          <ion-note>1000€</ion-note>
+          <ion-list-header>Cuenta: {{cuenta.num_cue}}</ion-list-header>
+          <ion-note>Saldo: {{cuenta.saldo_cue}}€</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="[p.url]" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">

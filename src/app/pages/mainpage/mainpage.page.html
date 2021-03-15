@@ -3,11 +3,39 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Página Principal
-    </ion-title>
+    <ion-title>Página Principal</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <h1>Cuenta : {{cuenta.num_cue}}</h1>
+  <p>
+    <ion-list>
+      <ion-item> 
+        <ion-select [(ngModel)]="cuenta" multiple="false">
+          <ion-select-option *ngFor="let c of cuentas; let i = index" [value]="c">Nº de cuenta: {{c.num_cue}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+  </ion-list>
+    <ion-list>
+      <ion-item >
+        <ion-label><b>Nº de cuenta:</b> {{cuenta.num_cue}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Nombre de la cuenta:</b> {{cuenta.nombre_cue}} </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Propietario:</b> {{cuenta.propietario}} </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Saldo :</b> {{cuenta.saldo_cue}} €</ion-label>
+      </ion-item>
+  </ion-list>
+  </p>
+  <ion-button expand="block" fill="outline">Crear Cuenta</ion-button>
+  <ion-button expand="block" fill="outline">Cambiar Cuenta</ion-button>
+
+
+
 
 </ion-content>
