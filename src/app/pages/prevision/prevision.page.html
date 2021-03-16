@@ -7,6 +7,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <h1>Presupuesto general</h1>
+  <ion-list>
+  <ion-item>
+    <ion-label>Gastos</ion-label>
+    <ion-select [(ngModel)]="periodo" multiple="false">
+      <ion-select-option *ngFor="let d of tiempo;" [value]="d">{{d}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
 </ion-content>

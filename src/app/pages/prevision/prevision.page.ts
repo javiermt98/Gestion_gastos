@@ -9,6 +9,13 @@ export class PrevisionPage implements OnInit {
 
   constructor() { }
 
+  tiempo:string[] = [
+    "Semanal","Mensual","Anual"
+  ];
+
+  periodo:string="Mensual";
+    
+
   ngOnInit() {
   }
 

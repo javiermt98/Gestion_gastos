@@ -12,8 +12,9 @@
   <p>
     <ion-list>
       <ion-item> 
+        <ion-label>Cuenta</ion-label>
         <ion-select [(ngModel)]="cuenta" multiple="false">
-          <ion-select-option *ngFor="let c of cuentas; let i = index" [value]="c">Nº de cuenta: {{c.num_cue}}</ion-select-option>
+          <ion-select-option *ngFor="let c of cuentas; let i = index" [value]="c">{{c.num_cue}}</ion-select-option>
         </ion-select>
     </ion-item>
   </ion-list>
