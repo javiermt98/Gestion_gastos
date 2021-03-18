@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'privacy',
     loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
+  },  {
+    path: 'addcategoria',
+    loadChildren: () => import('./pages/addcategoria/addcategoria.module').then( m => m.AddcategoriaPageModule)
   }
+
 
 
 ];
