@@ -9,6 +9,9 @@ export class IngresosPage implements OnInit {
 
   constructor() { }
 
+  periodo:string[] = ["Semana", "Mes", "Año", "Total"];
+  tiempo:string="Total";
+
   ngOnInit() {
   }
 

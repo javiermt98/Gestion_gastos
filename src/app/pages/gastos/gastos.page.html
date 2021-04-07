@@ -8,5 +8,15 @@
 </ion-header>
 
 <ion-content>
-<p></p>
+<p>
+  <ion-list>
+    <ion-item> 
+      <ion-label>Gastos</ion-label>
+      <ion-select [(ngModel)]="tiempo" multiple="false">
+        <ion-select-option *ngFor="let g of periodo;" [value]="g">{{g}}</ion-select-option>
+      </ion-select>
+  </ion-item>
+</ion-list>
+<ion-button expand="block" fill="outline" href="addmovimiento">Agregar Movimiento</ion-button>
+</p>
 </ion-content>

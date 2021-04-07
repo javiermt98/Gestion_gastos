@@ -37,6 +37,10 @@ const routes: Routes = [
   },  {
     path: 'addcategoria',
     loadChildren: () => import('./pages/addcategoria/addcategoria.module').then( m => m.AddcategoriaPageModule)
+  },
+  {
+    path: 'addmovimiento',
+    loadChildren: () => import('./pages/addmovimiento/addmovimiento.module').then( m => m.AddmovimientoPageModule)
   }
 
 

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Movimiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <p>
+    <ion-list>
+      <ion-item> 
+        <ion-label>Tipo de Movimiento</ion-label>
+        <ion-select [(ngModel)]="tipo_mov" multiple="false">
+          <ion-select-option *ngFor="let sm of seleccion_mov;" [value]="sm">{{sm}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    </ion-list>
+  </p>
+
+  <form>
+
+    <div>
+      <ion-label>Cantidad: </ion-label>
+      <ion-input required="true"></ion-input>
+      
+      <ion-label>Descripción: </ion-label>
+      <ion-input></ion-input>
+      
+      <ion-label>Categoría: </ion-label>
+      <ion-input required="true"></ion-input>
+    </div>
+
+    <div *ngIf="mostrarMovPer()">
+      <ion-label>Fecha Inicio: </ion-label>
+      <ion-datetime placeholder="Fecha del primer pago" [(NgModel)]="fechaseleccionada" [max]="today"></ion-datetime>
+      
+      <ion-label>Periodicidad : </ion-label>
+      <ion-input placeholder="Número de días hasta el siguiente pago" required="true"></ion-input>
+    </div>
+
+    <ion-button type="submit" expand="block" fill="outline">Añadir Movimiento</ion-button>
+
+</form>
+
+  
+
+</ion-content>
