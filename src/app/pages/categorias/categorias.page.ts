@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { icategoria } from 'src/app/services/icategorias';
+import { icategoria } from 'src/app/pojos/icategorias';
 
 @Component({
   selector: 'app-categorias',

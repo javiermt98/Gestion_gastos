@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { icuenta } from 'src/app/services/icuenta';
+import { icuenta } from 'src/app/pojos/icuenta';
 
 @Component({
   selector: 'app-mainpage',

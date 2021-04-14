@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { icuenta } from './services/icuenta';
+import { icuenta } from './pojos/icuenta';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
