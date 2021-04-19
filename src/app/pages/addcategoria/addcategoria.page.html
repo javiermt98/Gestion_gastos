@@ -12,19 +12,24 @@
         <ion-input type="text" formControlName="nombre_cat" [class.is-invalid]="nombreNoValido" class="form-control"></ion-input>
         <ion-text color="danger"><small *ngIf="nombreNoValido" >Este campo no puede estar vacío</small></ion-text>
     </div>
-    <div class="form-group ion-padding-bottom">
-      <ion-label>Icono de la categoría: </ion-label>
-      <ion-input type="text" formControlName="icono_cat"></ion-input>
-      <ion-text color="danger"><small *ngIf="iconoNoValido" >Este campo no puede estar vacío</small></ion-text>
-    </div>
+
+
       <div class="form-group ion-padding-bottom">
       <ion-label>Gasto límite (si tiene): </ion-label>
-      <ion-input type="number" formControlName="gasto_limite" ></ion-input>
-      <ion-text color="danger"><small *ngIf="gastolimNoValido" >No puede haber un gasto límite negativo</small></ion-text>
+      <ion-input type="number" formControlName="max_gasto_cat" ></ion-input>
+      <ion-text color="danger"><small *ngIf="maxgastoNoValido" >No puede haber un gasto límite negativo</small></ion-text>
     </div>
      
       <ion-label>Categoría a la que pertenece (si tiene): </ion-label>
       <ion-input type="number" formControlName="id_cat_padre"></ion-input>
+
+      <div class="form-group ion-padding-bottom">
+        <ion-label>Icono de la categoría: </ion-label>
+        <ion-input type="text" readonly formControlName="icono_cat"></ion-input>
+        <ion-text color="danger"><small *ngIf="iconoNoValido" >Este campo no puede estar vacío</small></ion-text>
+      </div>
+
+      <ion-button *ngFor="let b of botones_menu; let i = index" (click)="iconoseleccionado(b)" fill="outline" size="large" ><ion-icon [name]="b+'-outline'"></ion-icon></ion-button>
 
       <ion-button type="submit" expand="block" fill="outline">Registrar Categoría</ion-button>
 

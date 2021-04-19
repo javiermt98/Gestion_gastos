@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'addmovimiento',
     loadChildren: () => import('./pages/addmovimiento/addmovimiento.module').then( m => m.AddmovimientoPageModule)
+  },
+  {
+    path: 'addcuenta',
+    loadChildren: () => import('./pages/addcuenta/addcuenta.module').then( m => m.AddcuentaPageModule)
   }
 
 

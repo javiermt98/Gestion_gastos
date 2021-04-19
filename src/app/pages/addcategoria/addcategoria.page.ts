@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { icategoria, nuevacategoria } from 'src/app/pojos/icategorias';
+import { icategoria, categoriavacia } from 'src/app/pojos/icategorias';
 import {DaoCategoriasService} from 'src/app/dao/dao_categorias_service';
 import { AlertController } from '@ionic/angular';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-addcategoria',
@@ -13,15 +13,11 @@ import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 export class AddcategoriaPage implements OnInit {
 
-  
-nombre_cat:string="Categoria";
-max_gastos_cat:number=0;
-icono_cat:string="help-circle-outline";
-
+botones_menu:string[]=["barbell" ,"boat" ,"diamond", "film", "cog", "hammer", "laptop", "car-sport", "cart", "dice", "bulb", "cash", "fast-food" ,"flash","game-controller" ,"gift" ,"home" ,"paw" ,"phone-portrait" ,"shirt" ,"storefront" ,"tennisball", "wifi", "help-circle"];
 //Formulario Reactivo
 formulario: FormGroup;
 
-public categoria:icategoria = nuevacategoria();
+public categoria:icategoria = categoriavacia();
 
 constructor(public alertController:AlertController, public daocategoriasservide: DaoCategoriasService, public fb: FormBuilder) {
 }
@@ -37,10 +33,13 @@ public addcategoria(){
 
   //Marca todos los botones como "tocados"
   Object.values(this.formulario.controls).forEach(control => { control.markAsTouched()});
+  if(!this.formulario.invalid){
+    this.categoriacreada();
+    this.categoria = this.formulario.value;
+    console.log(this.categoria);
+    this.daocategoriasservide.Nuevo(this.categoria);
 
-  this.categoriacreada();
-  
-
+  }
 }
 
 //Alerta que salta cuando creas una categoria
@@ -54,18 +53,22 @@ categoriacreada(){
   });
 }
 
+//Cambiar el texto del icono al hacer click en él
+public iconoseleccionado(icono:string){
+  this.formulario.get('icono_cat').setValue(icono+'-outline');
+}
+
 
 
 crearFormulario(){
   this.formulario = this.fb.group({
     nombre_cat: (['', Validators.required ]),
-    icono_cat:  (['', Validators.required]),
-    gasto_limite:  (['', Validators.min(0)]),
+    icono_cat:  (['help-circle-outline', Validators.required]),
+    max_gasto_cat:  (['', Validators.min(0)]),
     id_cat_padre:  ([''])
-
-    
   });
 }
+
 
 //Validar informacion
 get nombreNoValido(){
@@ -76,8 +79,8 @@ get iconoNoValido(){
   return this.formulario.get('icono_cat').invalid && this.formulario.get('icono_cat').touched;
 }
 
-get gastolimNoValido(){
-  return this.formulario.get('gasto_limite').invalid && this.formulario.get('gasto_limite').touched;
+get maxgastoNoValido(){
+  return this.formulario.get('max_gasto_cat').invalid && this.formulario.get('max_gasto_cat').touched;
 }
 
 
