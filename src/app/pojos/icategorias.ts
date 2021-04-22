@@ -28,13 +28,13 @@ export function nuevacategoria(a,b,c,d,e):icategoria{
 
 
 export function CategoriasToAJSON(data):any{
-    return data["productos"].records.map((val) => {
+    return data["categoria"].records.map((val) => {
             return {
-            id_cat:		val[0],
+            id_cat:		        val[0],
             nombre_cat:	        val[1],
             max_gasto_cat:	    val[2],
             icono_cat:	        val[3],
-            id_cat_padre:	    val[5],
+            id_cat_padre:	    val[4],
             }
     });               
 }

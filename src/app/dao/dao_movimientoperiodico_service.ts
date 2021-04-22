@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class DaoMovimientosPeriodicosService {
 
-  API_ENDPOINT = 'http://localhost:80/php-crud/api.php';
+  API_ENDPOINT = 'http://localhost:80/api/api.php';
 
   constructor(private http: HttpClient) { }
 

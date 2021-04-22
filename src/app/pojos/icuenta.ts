@@ -1,4 +1,5 @@
 export interface icuenta{
+    id_cue:number,
     num_cue:number,  
     propietario:string,  
     nombre_cue:string,  
@@ -7,6 +8,7 @@ export interface icuenta{
 
 export function cuentaVacia():icuenta{
     return{
+        id_cue:0,
         num_cue:0,  
         propietario:'',  
         nombre_cue:'',  
@@ -14,24 +16,25 @@ export function cuentaVacia():icuenta{
     }
 }
 
-export function nuevacuenta(a,b,c,d):icuenta{
+export function nuevacuenta(a,b,c,d,e):icuenta{
     return{
-        num_cue:a,  
-        propietario:b,  
-        nombre_cue:c,  
-        saldo_cue:d
+        id_cue:a,
+        num_cue:b,  
+        propietario:c,  
+        nombre_cue:d,  
+        saldo_cue:e
     }
 }
 
 
-export function CategoriasToAJSON(data):any{
-    return data["productos"].records.map((val) => {
+export function CuentasToAJSON(data):any{
+    return data["cuenta"].records.map((val) => {
             return {
-            id_cat:		val[0],
-            nombre_cat:	        val[1],
-            max_gasto_cat:	    val[2],
-            icono_cat:	        val[3],
-            id_cat_padre:	    val[5],
+            id_cue:		        val[0],
+            num_cue:	        val[1],
+            propietario:	    val[2],
+            nombre_cue:	        val[3],
+            saldo_cue:	        val[4],
             }
     });               
 }

@@ -18,6 +18,7 @@ export class AppComponent {
   ];
 
   cuenta:icuenta = {
+    id_cue: 1,
     num_cue:234,
     propietario:"Javier",
     nombre_cue:"Main Account",  

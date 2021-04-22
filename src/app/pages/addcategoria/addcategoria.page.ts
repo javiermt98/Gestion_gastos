@@ -3,6 +3,7 @@ import { icategoria, categoriavacia } from 'src/app/pojos/icategorias';
 import {DaoCategoriasService} from 'src/app/dao/dao_categorias_service';
 import { AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { CategoriasService } from './services/categoria.service';
 
 @Component({
   selector: 'app-addcategoria',
@@ -13,13 +14,13 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 export class AddcategoriaPage implements OnInit {
 
-botones_menu:string[]=["barbell" ,"boat" ,"diamond", "film", "cog", "hammer", "laptop", "car-sport", "cart", "dice", "bulb", "cash", "fast-food" ,"flash","game-controller" ,"gift" ,"home" ,"paw" ,"phone-portrait" ,"shirt" ,"storefront" ,"tennisball", "wifi", "help-circle"];
+botones_menu:string[]=["barbell" ,"boat" ,"diamond","film" ,"cog" ,"water" ,"hammer" ,"laptop" ,"car-sport" ,"cart" ,"dice" ,"bulb" ,"cash" ,"fast-food" ,"flash" ,"game-controller" ,"gift" ,"home" ,"paw" ,"phone-portrait" ,"shirt" ,"storefront" ,"tennisball" ,"wifi" ,"help-circle"];
 //Formulario Reactivo
 formulario: FormGroup;
 
 public categoria:icategoria = categoriavacia();
 
-constructor(public alertController:AlertController, public daocategoriasservide: DaoCategoriasService, public fb: FormBuilder) {
+constructor(public alertController:AlertController, public  categoriasService: CategoriasService, public daocategoriasservide: DaoCategoriasService, public fb: FormBuilder) {
 }
 
 ngOnInit() {
@@ -29,15 +30,13 @@ ngOnInit() {
 
 //Boton del formulario
 public addcategoria(){
-  console.log(this.formulario);
 
   //Marca todos los botones como "tocados"
   Object.values(this.formulario.controls).forEach(control => { control.markAsTouched()});
   if(!this.formulario.invalid){
     this.categoriacreada();
     this.categoria = this.formulario.value;
-    console.log(this.categoria);
-    this.daocategoriasservide.Nuevo(this.categoria);
+    this.categoriasService.NuevaCategoria(this.categoria);
 
   }
 }

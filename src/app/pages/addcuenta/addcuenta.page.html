@@ -7,9 +7,10 @@
 
 <ion-content class="ion-padding">
   <form  [formGroup]="formulario" (ngSubmit)="addcuenta()">
+
     <div class="form-group ion-padding-bottom">
         <ion-label>Número de cuenta: </ion-label>
-        <ion-input type="number" formControlName="num_cue" [class.is-invalid]="numNoValido" class="form-control"></ion-input>
+        <ion-input type="number" formControlName="num_cue" class="form-control"></ion-input>
         <ion-text color="danger"><small *ngIf="numNoValido" >Este campo no puede estar vacío</small></ion-text>
     </div>
 
@@ -20,7 +21,7 @@
 
     <div class="form-group ion-padding-bottom">
       <ion-label>Propietario: </ion-label>
-      <ion-input type="number" formControlName="propietario" class="form-control"></ion-input>
+      <ion-input type="text" formControlName="propietario" class="form-control"></ion-input>
       <ion-text color="danger"><small *ngIf="propietarioNoValido" >Este campo no puede estar vacío</small></ion-text>
     </div>
 

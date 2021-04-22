@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { icuenta } from 'src/app/pojos/icuenta';
+import { icuenta, cuentaVacia } from 'src/app/pojos/icuenta';
+import { CuentasService } from 'src/app/pages/addcuenta/services/cuenta.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -7,22 +8,28 @@ import { icuenta } from 'src/app/pojos/icuenta';
   styleUrls: ['./mainpage.page.scss'],
 })
 export class MainpagePage implements OnInit {
-  
 
-  constructor() {
+  public cuentas: icuenta[] = [];
+  public cuenta:icuenta = cuentaVacia();
+
+  constructor(public cuentasService: CuentasService) {
     
    }
   
   ngOnInit() {
+    this.cuentasService.getCuentas().subscribe({
+      next: cuentas =>{
+        this.cuentas = cuentas;
+      }
+    });
+
   }
 
-  public cuentas = [
-    {num_cue:123,  propietario:"Javier",  nombre_cue:"Cuenta Principal",  saldo_cue:10000},
-    {num_cue:456,  propietario:"Angel",  nombre_cue:"Cuenta Gastos Menores",  saldo_cue:200000},
-    {num_cue:789,  propietario:"Sergio",  nombre_cue:"Cuenta BBVA",  saldo_cue:1000}
-  ];
 
-  public cuenta:icuenta = this.cuentas[0];
+
+  
+
+  
 
 
 }
