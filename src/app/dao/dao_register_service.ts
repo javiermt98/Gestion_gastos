@@ -6,34 +6,35 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class DaoMovimientosService {
+export class DaoRegisterService {
 
   API_ENDPOINT = 'http://localhost:80/api/api.php';
 
   constructor(private http: HttpClient) { }
 
   get(): Observable<[]> {               // Devuelve un array de json observable de la BD
-      return  this.http.get<[]>(this.API_ENDPOINT + '/movimiento')
+      return  this.http.get<[]>(this.API_ENDPOINT + '/login')
       .pipe(catchError(this.handleError)); 
   }
 
   getId(id: number):  Observable<any> {  // Ahora devuelve un json de la BD
-    return this.http.get<[]>(this.API_ENDPOINT + '/movimiento/'+  id)    
+    return this.http.get<[]>(this.API_ENDPOINT + '/login/'+  id)    
     .pipe(catchError(this.handleError));  
   }
 
-  put(movimiento) {                       // Modificar producto en la BD
+  put(register) {                       // Modificar producto en la BD
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.put(this.API_ENDPOINT + '/movimiento/' + movimiento.id_mov , movimiento, {headers: headers});
+    return this.http.put(this.API_ENDPOINT + '/login/' + register.id_login , register,
+                                     {headers: headers});
   }
   
-  Nuevo(movimiento) {                     // Nuevo producto en la BD
+  Nuevo(register) {                     // Nuevo producto en la BD
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(this.API_ENDPOINT + '/movimiento/', movimiento, {headers: headers});
+    return this.http.post(this.API_ENDPOINT + '/login/', register, {headers: headers});
   }
 
   Eliminar(id:number){
-    return this.http.delete(this.API_ENDPOINT + '/movimiento/' + id);
+    return this.http.delete(this.API_ENDPOINT + '/login/' + id);
   }
 
 

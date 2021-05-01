@@ -30,7 +30,7 @@ export class DaoCuentasService {
   
   Nuevo(cuenta) {                     // Nuevo producto en la BD
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post(this.API_ENDPOINT + '/cuenta', cuenta, {headers: headers});
+    return this.http.post(this.API_ENDPOINT + '/cuenta/', cuenta, {headers: headers});
   }
 
   Eliminar(id:number){

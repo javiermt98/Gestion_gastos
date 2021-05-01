@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form  [formGroup]="formulario" (ngSubmit)="registrarse()">
+
+    <div class="form-group ion-padding-bottom">
+        <ion-label>Nombre: </ion-label>
+        <ion-input type="text" formControlName="nombre_log" class="form-control"></ion-input>
+        <ion-text color="danger"><small *ngIf="nombreNoValido" >Este campo no puede estar vacío</small></ion-text>
+    </div>
+
+      <div class="form-group ion-padding-bottom">
+      <ion-label>Apellidos: </ion-label>
+      <ion-input type="text" formControlName="apellidos_log" class="form-control"></ion-input>
+      <ion-text color="danger"><small *ngIf="apellidosNoValido" >Este campo no puede estar vacío</small></ion-text>
+    </div>
+    
+    <div class="form-group ion-padding-bottom">
+      <ion-label>Usuario: </ion-label>
+      <ion-input type="text" formControlName="correo_log" class="form-control"></ion-input>
+      <ion-text color="danger"><small *ngIf="usrNoValido" >Este campo no puede estar vacío</small></ion-text>
+  </div>
+
+  <div class="form-group ion-padding-bottom">
+    <ion-label>Contraseña: </ion-label>
+    <ion-input type="text" formControlName="pwd_log" class="form-control"></ion-input>
+    <ion-text color="danger"><small *ngIf="pwdNoValida" >La contraseña debe tener al menos 6 caracteres</small></ion-text>
+</div>
+
+    <div class="form-group ion-padding-bottom">
+    <ion-label>Fecha de nacimiento: </ion-label>
+    <ion-input type="date" formControlName="nacimiento_log" class="form-control"></ion-input>
+    <ion-text color="danger"><small *ngIf="nacimientoNoValida" >Tienes que ser mayor de 14 años</small></ion-text>
+  </div>
+
+    <ion-button type="submit" expand="block" fill="outline">Registrarse</ion-button>
+    <ion-button type="button" expand="block" href="login" fill="outline">Ya tengo cuenta</ion-button>
+
+</form>
+
+</ion-content>

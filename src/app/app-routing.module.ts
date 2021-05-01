@@ -34,7 +34,8 @@ const routes: Routes = [
   {
     path: 'privacy',
     loadChildren: () => import('./pages/privacy/privacy.module').then( m => m.PrivacyPageModule)
-  },  {
+  },
+  {
     path: 'addcategoria',
     loadChildren: () => import('./pages/addcategoria/addcategoria.module').then( m => m.AddcategoriaPageModule)
   },
@@ -45,7 +46,23 @@ const routes: Routes = [
   {
     path: 'addcuenta',
     loadChildren: () => import('./pages/addcuenta/addcuenta.module').then( m => m.AddcuentaPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'forgotpwd',
+    loadChildren: () => import('./pages/forgotpwd/forgotpwd.module').then( m => m.ForgotpwdPageModule)
+  },  {
+    path: 'logout',
+    loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
   }
+
 
 
 

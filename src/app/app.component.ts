@@ -14,6 +14,10 @@ export class AppComponent {
     { title: 'Previsión de Gastos', url: 'prevision', icon: 'stats-chart' },
     { title: 'Políticas de Privacidad', url: 'privacy', icon: 'information-circle' },
     { title: 'Sobre la aplicación', url: 'about', icon: 'help-circle' },
+    { title: 'Cerrar Sesión', url: 'logout', icon: 'log-out' },
+    { title: 'Entrar a mi cuenta', url: 'login', icon: 'log-in' },
+    { title: 'Registrarse', url: 'register', icon: 'person-add' },
+    { title: 'Recuperar Contraseña', url: 'forgotpwd', icon: 'refresh' },
 
   ];
 

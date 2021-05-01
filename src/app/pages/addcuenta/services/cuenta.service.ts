@@ -78,7 +78,7 @@ export class CuentasService {
     NuevaCuenta(p:icuenta){
       console.log(p);  
       this.DaoCuentas.Nuevo(p).subscribe((NroReg) => { // Nuevo en la BD
-        console.log("que es ok:"+NroReg);       
+        console.log("ok:"+NroReg);       
         let q=nuevacuenta(NroReg, p.nombre_cue,p.num_cue,p.propietario,p.saldo_cue);
         let itemIndex = this.cuentas.findIndex(item => item.id_cue == NroReg);
         if (itemIndex<0) this.cuentas.push(q);  

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { CuentasService } from 'src/app/pages/addcuenta/services/cuenta.service';
 import { cuentaVacia, icuenta } from 'src/app/pojos/icuenta';
@@ -11,7 +12,7 @@ import { cuentaVacia, icuenta } from 'src/app/pojos/icuenta';
 })
 export class AddcuentaPage implements OnInit {
 
-  constructor( public alertController:AlertController, public fb: FormBuilder, public cuentasService: CuentasService) { }
+  constructor( public alertController:AlertController, public fb: FormBuilder, public cuentasService: CuentasService, public router:Router) { }
 
   ngOnInit() {
     this.crearFormulario();
@@ -44,7 +45,6 @@ public addcuenta(){
     console.log(this.cuenta);
     this.cuentasService.NuevaCuenta(this.cuenta);
     
-
   }
 }
 
