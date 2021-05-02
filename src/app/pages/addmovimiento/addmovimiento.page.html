@@ -33,6 +33,10 @@
 
     <div class="form-group ion-padding-bottom">
       <ion-label>Categoría: </ion-label>
+      <ion-select formControlName="id_cat" multiple="false">
+        <ion-select-option *ngFor="let c of categorias; let i = index" [value]="c">{{c.nombre_cat}}</ion-select-option>
+      </ion-select>
+      <ion-text color="danger"><small *ngIf="categoriaNoValida" >Este campo no puede estar vacío</small></ion-text>
     </div>
 
     <div *ngIf="!mostrarMovPer()" class="form-group ion-padding-bottom">

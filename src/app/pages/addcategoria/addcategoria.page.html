@@ -21,7 +21,10 @@
     </div>
      
       <ion-label>Categoría a la que pertenece (si tiene): </ion-label>
-      <ion-input type="number" formControlName="id_cat_padre"></ion-input>
+      <ion-select formControlName="id_cat_padre"  multiple="false">
+        <ion-select-option *ngFor="let c of categorias; let i = index" [value]="c">{{c.nombre_cat}}</ion-select-option>
+      </ion-select>
+      <!-- <ion-input type="number" formControlName="id_cat_padre"></ion-input> -->
 
       <div class="form-group ion-padding-bottom">
         <ion-label>Icono de la categoría: </ion-label>

@@ -20,22 +20,28 @@
   </ion-list>
     <ion-list>
       <ion-item >
-        <ion-label><b>Nº de cuenta:</b> {{cuenta.num_cue}}</ion-label>
+        <ion-label [color]="colortexto"><b>Nº de cuenta:</b></ion-label>
+        <ion-input type="text" value="{{cuenta.num_cue}}" [(ngModel)]="cuenta.num_cue" [readonly]="!modificando"> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label><b>Nombre de la cuenta:</b> {{cuenta.nombre_cue}} </ion-label>
+        <ion-label [color]="colortexto"><b>Nombre de la cuenta:</b> </ion-label>
+        <ion-input type="text" value="{{cuenta.nombre_cue}}" [(ngModel)]="cuenta.nombre_cue" [readonly]="!modificando"> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label><b>Propietario:</b> {{cuenta.propietario}} </ion-label>
+        <ion-label [color]="colortexto"><b>Propietario:</b> </ion-label>
+        <ion-input type="text" value="{{cuenta.propietario}}" [(ngModel)]="cuenta.propietario"  [readonly]="!modificando"> </ion-input>
       </ion-item>
       <ion-item>
-        <ion-label><b>Saldo :</b> {{cuenta.saldo_cue}} €</ion-label>
+        <ion-label [color]="colortexto"><b>Saldo :</b></ion-label>
+        <ion-input type="text" value="{{cuenta.saldo_cue}}" [(ngModel)]="cuenta.saldo_cue" [readonly]="!modificando"> </ion-input>
+        <ion-label>€</ion-label>
       </ion-item>
   </ion-list>
   </p>
-  <ion-button expand="block" href="addcuenta" fill="outline">Crear Cuenta</ion-button>
- <!-- <ion-button expand="block" fill="outline">Cambiar Cuenta</ion-button> -->
-
+  <ion-button expand="block" href="addcuenta" fill="outline" *ngIf="!modificando">Crear Cuenta</ion-button>
+  <ion-button expand="block" fill="outline" (click)="modificando = !modificando && colortexto = 'danger'" *ngIf="!modificando">Modificar datos de la Cuenta</ion-button>
+  <ion-button expand="block" fill="outline" (click)="borrarCuenta()" color="danger" *ngIf="!modificando">Borrar cuenta bancaria actual</ion-button>
+  <ion-button expand="block" fill="outline" (click)="modificaCuenta()" color="success" *ngIf="modificando">Aceptar</ion-button>
 
 
 

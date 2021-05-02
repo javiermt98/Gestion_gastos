@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { categoriavacia, icategoria } from 'src/app/pojos/icategorias';
 import { imovimiento, movimientoVacio } from 'src/app/pojos/imovimiento';
+import { CategoriasService } from '../addcategoria/services/categoria.service';
 import { MovimientosService } from './services/movimiento.service';
 
 @Component({
@@ -11,7 +13,13 @@ import { MovimientosService } from './services/movimiento.service';
 })
 export class AddmovimientoPage implements OnInit {
 
-  constructor(public alertController:AlertController, public fb: FormBuilder, public movimientoService: MovimientosService) { }
+  constructor(public alertController:AlertController, public fb: FormBuilder, public movimientoService: MovimientosService, public categoriasService:CategoriasService) { 
+    this.categoriasService.getCategorias().subscribe({
+      next: categorias =>{
+        this.categorias = categorias;
+      }
+    });
+  }
 
   seleccion_mov:string[] = ["Ingreso", "Gasto", "Movimiento Periódico"];
   tipo_mov:string="Ingreso";
@@ -32,6 +40,8 @@ export class AddmovimientoPage implements OnInit {
   }
 
   public movimiento:imovimiento = movimientoVacio();
+  categorias:icategoria[];
+  public categoria:icategoria = categoriavacia();
 
 
   formulario: FormGroup;
@@ -74,5 +84,9 @@ export class AddmovimientoPage implements OnInit {
   get fecha_movperNoValida(){
     return this.formulario.get('fecha_movper').invalid && this.formulario.get('fecha_movper').touched;
   }
+  get categoriaNoValida(){
+    return this.formulario.get('id_cat').invalid && this.formulario.get('id_cat').touched;
+  }
+  
 
 }

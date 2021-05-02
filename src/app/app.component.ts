@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { icuenta } from './pojos/icuenta';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -20,15 +19,8 @@ export class AppComponent {
     { title: 'Recuperar Contraseña', url: 'forgotpwd', icon: 'refresh' },
 
   ];
-
-  cuenta:icuenta = {
-    id_cue: 1,
-    num_cue:234,
-    propietario:"Javier",
-    nombre_cue:"Main Account",  
-    saldo_cue:100000
-  };
  
+  
   constructor() {}
 
 }

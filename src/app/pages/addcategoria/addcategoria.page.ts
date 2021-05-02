@@ -17,10 +17,19 @@ export class AddcategoriaPage implements OnInit {
 botones_menu:string[]=["barbell" ,"boat" ,"diamond","film" ,"cog" ,"water" ,"hammer" ,"laptop" ,"car-sport" ,"cart" ,"dice" ,"bulb" ,"cash" ,"fast-food" ,"flash" ,"game-controller" ,"gift" ,"home" ,"paw" ,"phone-portrait" ,"shirt" ,"storefront" ,"tennisball" ,"wifi" ,"help-circle"];
 //Formulario Reactivo
 formulario: FormGroup;
+categorias:icategoria[];
+
 
 public categoria:icategoria = categoriavacia();
 
 constructor(public alertController:AlertController, public  categoriasService: CategoriasService, public daocategoriasservide: DaoCategoriasService, public fb: FormBuilder) {
+  this.categoriasService.getCategorias().subscribe({
+    next: categorias =>{
+      this.categorias = categorias;
+
+    }
+  });
+
 }
 
 ngOnInit() {

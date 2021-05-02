@@ -42,8 +42,8 @@ public addcuenta(){
   if(!this.formulario.invalid){
     this.cuenta = this.formulario.value;
     this.cuentacreada();
-    console.log(this.cuenta);
     this.cuentasService.NuevaCuenta(this.cuenta);
+    this.router.navigateByUrl("/mainpage");
     
   }
 }

@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'mainpage',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -58,7 +58,8 @@ const routes: Routes = [
   {
     path: 'forgotpwd',
     loadChildren: () => import('./pages/forgotpwd/forgotpwd.module').then( m => m.ForgotpwdPageModule)
-  },  {
+  },
+  {
     path: 'logout',
     loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
   }
