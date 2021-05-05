@@ -31,7 +31,7 @@ export function nuevoregistro(a,b,c,d,e,f):iregister{
 
 
 export function RegistrosToAJSON(data):any{
-    return data["categoria"].records.map((val) => {
+    return data["login"].records.map((val) => {
         return {
             id_login:		    val[0],
             nombre_log:	        val[1],

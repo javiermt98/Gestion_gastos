@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 
 @Component({
   selector: 'app-logout',
@@ -9,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class LogoutPage implements OnInit {
 
-  constructor(public router: Router, public alertController:AlertController) { }
+  constructor(public router: Router, public alertController:AlertController, private session:GestionarSesionService) { }
 
   ngOnInit() {
   }
@@ -30,6 +31,7 @@ export class LogoutPage implements OnInit {
         {
           text: 'Cerrar sesión',
           handler: () => {
+            this.session.LogOut();
             this.router.navigateByUrl("/login");
         
             
