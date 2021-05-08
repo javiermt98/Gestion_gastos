@@ -13,7 +13,13 @@ export class GestionarSesionService {
   public SessionLogged:Isession;
 
   constructor() { 
-    this.isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
+    this.isUserLoggedIn$ = new BehaviorSubject<boolean>(false)
+    if(sessionStorage.getItem('currentUser') != null){
+      this.isUserLoggedIn$.next(true);
+    }
+    console.log(this.SessionLogged);
+    console.log(sessionStorage.getItem('currentUser'));
+    ;
   }
 
   setSession(Sesion:Isession) {
@@ -23,8 +29,8 @@ export class GestionarSesionService {
     console.log(this.isUserLoggedIn$.asObservable());
     this.SessionLogged = Sesion;
 
-    localStorage.setItem('currentUser', JSON.stringify(Sesion));
-    //sessionStorage.setItem('currentUser', JSON.stringify(Sesion));
+    //localStorage.setItem('currentUser', JSON.stringify(Sesion));
+    sessionStorage.setItem('currentUser', JSON.stringify(Sesion));
   }
 
   getSession() {
@@ -37,7 +43,7 @@ export class GestionarSesionService {
   
   LogOut():void{
     localStorage.removeItem('currentUser');
-    //this.isUserLoggedIn$.next(false);
+    this.isUserLoggedIn$.next(false);
 
     sessionStorage.removeItem('currentUser');
     this.SessionLogged = null;
