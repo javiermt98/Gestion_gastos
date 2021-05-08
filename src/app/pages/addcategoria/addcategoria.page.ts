@@ -4,6 +4,7 @@ import {DaoCategoriasService} from 'src/app/dao/dao_categorias_service';
 import { AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { CategoriasService } from './services/categoria.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addcategoria',
@@ -22,14 +23,21 @@ categorias:icategoria[];
 
 public categoria:icategoria = categoriavacia();
 
-constructor(public alertController:AlertController, public  categoriasService: CategoriasService, public daocategoriasservide: DaoCategoriasService, public fb: FormBuilder) {
+constructor(public alertController:AlertController, 
+  public  categoriasService: CategoriasService, 
+  public daocategoriasservide: DaoCategoriasService, 
+  public fb: FormBuilder,
+  public router:Router) {
   this.categoriasService.getCategorias().subscribe({
     next: categorias =>{
       this.categorias = categorias;
 
     }
   });
+}
 
+public backbtn(){
+  this.router.navigateByUrl("/categorias")
 }
 
 ngOnInit() {

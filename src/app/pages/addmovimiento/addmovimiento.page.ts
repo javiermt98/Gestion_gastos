@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { categoriavacia, icategoria } from 'src/app/pojos/icategorias';
 import { imovimiento, movimientoVacio } from 'src/app/pojos/imovimiento';
@@ -13,12 +14,20 @@ import { MovimientosService } from './services/movimiento.service';
 })
 export class AddmovimientoPage implements OnInit {
 
-  constructor(public alertController:AlertController, public fb: FormBuilder, public movimientoService: MovimientosService, public categoriasService:CategoriasService) { 
+  constructor(public alertController:AlertController, 
+    public fb: FormBuilder, 
+    public movimientoService: MovimientosService, 
+    public categoriasService:CategoriasService,
+    public router:Router) { 
     this.categoriasService.getCategorias().subscribe({
       next: categorias =>{
         this.categorias = categorias;
       }
     });
+  }
+
+  public backbtn(){
+    this.router.navigateByUrl("/ingresos")
   }
 
   seleccion_mov:string[] = ["Ingreso", "Gasto", "Movimiento Periódico"];

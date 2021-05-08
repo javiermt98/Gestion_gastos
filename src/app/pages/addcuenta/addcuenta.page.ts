@@ -18,6 +18,10 @@ export class AddcuentaPage implements OnInit {
     this.crearFormulario();
   }
 
+  public backbtn(){
+    this.router.navigateByUrl("/mainpage")
+  }
+
   public cuenta:icuenta = cuentaVacia();
 
 

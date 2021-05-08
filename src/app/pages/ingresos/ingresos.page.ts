@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingresos',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IngresosPage implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   periodo:string[] = ["Semana", "Mes", "Año", "Total"];
   tiempo:string="Total";
+
+  public backbtn(){
+    this.router.navigateByUrl("/addmovimiento")
+  }
 
   ngOnInit() {
   }

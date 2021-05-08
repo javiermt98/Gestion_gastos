@@ -8,23 +8,27 @@ import { Isession } from 'src/app/pojos/isession';
 })
 export class GestionarSesionService {
 
-  private isUserLoggedIn:boolean  = false;
-  private isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
+  private isUserLoggedIn:boolean;
+  private isUserLoggedIn$:BehaviorSubject<boolean> ;
   public SessionLogged:Isession;
 
-  constructor() { }
+  constructor() { 
+    this.isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
+  }
 
   setSession(Sesion:Isession) {
     this.isUserLoggedIn = true;
+    console.log(this.isUserLoggedIn$.asObservable());
     this.isUserLoggedIn$.next(true);
+    console.log(this.isUserLoggedIn$.asObservable());
     this.SessionLogged = Sesion;
 
-    //localStorage.setItem('currentUser', JSON.stringify(Sesion));
-    sessionStorage.setItem('currentUser', JSON.stringify(Sesion));
+    localStorage.setItem('currentUser', JSON.stringify(Sesion));
+    //sessionStorage.setItem('currentUser', JSON.stringify(Sesion));
   }
 
   getSession() {
-  	return JSON.parse(sessionStorage.getItem('currentUser'));
+  	return JSON.parse(localStorage.getItem('currentUser'));
   }
 
   isAuthenticated(): Observable<boolean> {
@@ -32,12 +36,13 @@ export class GestionarSesionService {
   };
   
   LogOut():void{
-    //localStorage.removeItem('currentUser');
-    this.isUserLoggedIn$.next(false);
+    localStorage.removeItem('currentUser');
+    //this.isUserLoggedIn$.next(false);
 
     sessionStorage.removeItem('currentUser');
     this.SessionLogged = null;
     this.isUserLoggedIn = false;
+    this.isUserLoggedIn$.next(false);
   }
 
 }

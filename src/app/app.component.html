@@ -3,14 +3,23 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="[p.url]" [routerLink]="[p.url]" lines="none" [(hidden)]="p.visibility" detail="false" routerLinkActive="selected">
+          <div  *ngIf="logged">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesLogIn; let i = index">
+            <ion-item routerDirection="[p.url]" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+        </div>
+        <div  *ngIf="!logged">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesLogOut; let i = index">
+            <ion-item routerDirection="[p.url]" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
         </ion-list>
-
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

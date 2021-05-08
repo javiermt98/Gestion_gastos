@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { first } from 'rxjs/operators';
 import { Isession } from 'src/app/pojos/isession';
-import { AuthService } from 'src/app/shared/authservice';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 import {RegisterService} from '../register/services/register.services'
 import {LoginService} from './services/login.services'
@@ -22,7 +21,6 @@ export class LoginPage implements OnInit {
     public alertController:AlertController,
     public fb: FormBuilder, 
     public loginService: LoginService, 
-    public authservice: AuthService, 
     private router: Router,
     private Session:GestionarSesionService) {
 
@@ -63,12 +61,13 @@ export class LoginPage implements OnInit {
       
       if (this.loginService.Testlogin(this.usr, this.pwd))  { 
             
-            let token="kekek";
+            let token="valido";
             let u: Isession = {username: this.usr ,token: token};        
             this.Session.setSession(u);
             this.router.navigateByUrl('/mainpage');
             
       } else {
+             this.registronovalido();
              this.router.navigateByUrl('/login');
       }
   }
@@ -88,6 +87,14 @@ export class LoginPage implements OnInit {
   }
   get pwdNoValida(){
     return this.formulario.get('pwd').invalid && this.formulario.get('pwd').touched;
+  }
+
+  public register(){
+    this.router.navigateByUrl("/register")
+  }
+
+  public forgotpwd(){
+    this.router.navigateByUrl("/forgotpwd")
   }
 
 

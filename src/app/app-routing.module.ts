@@ -62,7 +62,16 @@ const routes: Routes = [
   {
     path: 'logout',
     loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
+  },
+  {
+    path: '**',
+    redirectTo:'/404'
+  },
+  {
+    path: '404',
+    loadChildren: () => import('./pages/notfound404page/notfound404page.module').then( m => m.Notfound404pagePageModule)
   }
+
 
 
 

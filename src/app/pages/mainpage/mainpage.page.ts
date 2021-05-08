@@ -84,6 +84,10 @@ export class MainpagePage implements OnInit {
     this.colortexto = "";
   }
 
+  public addCuenta(){
+    this.router.navigateByUrl("/addcuenta")
+  }
+
  
 
 

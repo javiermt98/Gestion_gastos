@@ -38,7 +38,7 @@
       </ion-item>
   </ion-list>
   </p>
-  <ion-button expand="block" href="addcuenta" fill="outline" *ngIf="!modificando">Crear Cuenta</ion-button>
+  <ion-button expand="block" (click)="addCuenta()" fill="outline" *ngIf="!modificando">Crear Cuenta</ion-button>
   <ion-button expand="block" fill="outline" (click)="modificando = !modificando && colortexto = 'danger'" *ngIf="!modificando">Modificar datos de la Cuenta</ion-button>
   <ion-button expand="block" fill="outline" (click)="borrarCuenta()" color="danger" *ngIf="!modificando">Borrar cuenta bancaria actual</ion-button>
   <ion-button expand="block" fill="outline" (click)="modificaCuenta()" color="success" *ngIf="modificando">Aceptar</ion-button>
