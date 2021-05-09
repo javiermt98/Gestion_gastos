@@ -16,9 +16,10 @@ import { Router } from '@angular/router';
 export class AddcategoriaPage implements OnInit {
 
 botones_menu:string[]=["barbell" ,"boat" ,"diamond","film" ,"cog" ,"water" ,"hammer" ,"laptop" ,"car-sport" ,"cart" ,"dice" ,"bulb" ,"cash" ,"fast-food" ,"flash" ,"game-controller" ,"gift" ,"home" ,"paw" ,"phone-portrait" ,"shirt" ,"storefront" ,"tennisball" ,"wifi" ,"help-circle"];
-//Formulario Reactivo
+
 formulario: FormGroup;
 categorias:icategoria[];
+iconosel:string = "help-circle-outline";
 
 
 public categoria:icategoria = categoriavacia();
@@ -31,7 +32,6 @@ constructor(public alertController:AlertController,
   this.categoriasService.getCategorias().subscribe({
     next: categorias =>{
       this.categorias = categorias;
-
     }
   });
 }
@@ -71,6 +71,7 @@ categoriacreada(){
 
 //Cambiar el texto del icono al hacer click en él
 public iconoseleccionado(icono:string){
+  this.iconosel = icono;
   this.formulario.get('icono_cat').setValue(icono+'-outline');
 }
 

@@ -21,19 +21,24 @@
     </div>
      
       <ion-label>Categoría a la que pertenece (si tiene): </ion-label>
-      <ion-select formControlName="id_cat_padre"  multiple="false">
+      <ion-select formControlName="id_cat_padre"  multiple="false" placeholder="Selecciona una categoría">
         <ion-select-option *ngFor="let c of categorias; let i = index" [value]="c">{{c.nombre_cat}}</ion-select-option>
       </ion-select>
-      <!-- <ion-input type="number" formControlName="id_cat_padre"></ion-input> -->
+      
 
       <div class="form-group ion-padding-bottom">
         <ion-label>Icono de la categoría: </ion-label>
         <ion-input type="text" readonly formControlName="icono_cat"></ion-input>
         <ion-text color="danger"><small *ngIf="iconoNoValido" >Este campo no puede estar vacío</small></ion-text>
       </div>
-
-      <ion-button *ngFor="let b of botones_menu; let i = index" (click)="iconoseleccionado(b)" fill="outline" size="large" ><ion-icon [name]="b+'-outline'"></ion-icon></ion-button>
-
+      <div class="form-group ion-padding-bottom">
+        <ion-button size="large">
+          <ion-icon [name]="iconosel"></ion-icon>
+        </ion-button>
+      </div>
+      <ion-button *ngFor="let b of botones_menu; let i = index" (click)="iconoseleccionado(b)" fill="outline" size="large">
+        <ion-icon [name]="b+'-outline'"></ion-icon>
+      </ion-button>
       <ion-button type="submit" expand="block" fill="outline">Registrar Categoría</ion-button>
 
   </form>

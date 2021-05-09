@@ -16,25 +16,19 @@ export class GestionarSesionService {
     this.isUserLoggedIn$ = new BehaviorSubject<boolean>(false)
     if(sessionStorage.getItem('currentUser') != null){
       this.isUserLoggedIn$.next(true);
-    }
-    console.log(this.SessionLogged);
-    console.log(sessionStorage.getItem('currentUser'));
-    ;
+    };
   }
 
   setSession(Sesion:Isession) {
     this.isUserLoggedIn = true;
-    console.log(this.isUserLoggedIn$.asObservable());
     this.isUserLoggedIn$.next(true);
-    console.log(this.isUserLoggedIn$.asObservable());
     this.SessionLogged = Sesion;
-
-    //localStorage.setItem('currentUser', JSON.stringify(Sesion));
     sessionStorage.setItem('currentUser', JSON.stringify(Sesion));
   }
 
   getSession() {
-  	return JSON.parse(localStorage.getItem('currentUser'));
+    this.SessionLogged = JSON.parse(sessionStorage.getItem('currentUser'));
+  	return  this.SessionLogged;
   }
 
   isAuthenticated(): Observable<boolean> {
@@ -42,7 +36,6 @@ export class GestionarSesionService {
   };
   
   LogOut():void{
-    localStorage.removeItem('currentUser');
     this.isUserLoggedIn$.next(false);
 
     sessionStorage.removeItem('currentUser');

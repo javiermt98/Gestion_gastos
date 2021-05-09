@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     public fb: FormBuilder, 
     public loginService: LoginService, 
     private router: Router,
-    private Session:GestionarSesionService) {
+    ) {
 
 
      }
@@ -61,9 +61,7 @@ export class LoginPage implements OnInit {
       
       if (this.loginService.Testlogin(this.usr, this.pwd))  { 
             
-            let token="valido";
-            let u: Isession = {username: this.usr ,token: token};        
-            this.Session.setSession(u);
+            
             this.router.navigateByUrl('/mainpage');
             
       } else {

@@ -24,8 +24,8 @@ export class CuentasService {
     getCuentas(): Observable<icuenta[]> {  
       
       this.myCon=this.DaoCuentas.get().subscribe({
-        next: cuenta => {          
-          this.cuentas = CuentasToAJSON(cuenta);          
+        next: cuentas => {          
+          this.cuentas = CuentasToAJSON(cuentas);          
           this.cuentas$.next(this.cuentas); // Emite evento que esta lleno !!  
           return this.cuentas$.asObservable();
         },
@@ -79,7 +79,7 @@ export class CuentasService {
       console.log(p);  
       this.DaoCuentas.Nuevo(p).subscribe((NroReg) => { // Nuevo en la BD
         console.log("ok:"+NroReg);       
-        let q=nuevacuenta(NroReg, p.nombre_cue,p.num_cue,p.propietario,p.saldo_cue);
+        let q=nuevacuenta(NroReg, p.nombre_cue,p.num_cue,p.propietario,p.saldo_cue,p.id_login);
         let itemIndex = this.cuentas.findIndex(item => item.id_cue == NroReg);
         if (itemIndex<0) this.cuentas.push(q);  
         this.cuentas$.next(this.cuentas); // Notifica que el array ha cambiado !!

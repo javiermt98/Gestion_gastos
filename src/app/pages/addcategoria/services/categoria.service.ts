@@ -36,6 +36,8 @@ export class CategoriasService {
       });
       return this.categorias$.asObservable();
     }
+
+    
  
     getCategoria(id: number):Observable<icategoria> {
 

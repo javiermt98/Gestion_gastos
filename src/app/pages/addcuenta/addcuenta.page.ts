@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { CuentasService } from 'src/app/pages/addcuenta/services/cuenta.service';
 import { cuentaVacia, icuenta } from 'src/app/pojos/icuenta';
+import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 
 @Component({
   selector: 'app-addcuenta',
@@ -12,7 +13,7 @@ import { cuentaVacia, icuenta } from 'src/app/pojos/icuenta';
 })
 export class AddcuentaPage implements OnInit {
 
-  constructor( public alertController:AlertController, public fb: FormBuilder, public cuentasService: CuentasService, public router:Router) { }
+  constructor( public alertController:AlertController, public fb: FormBuilder, public cuentasService: CuentasService, public router:Router, public session: GestionarSesionService) { }
 
   ngOnInit() {
     this.crearFormulario();
@@ -45,6 +46,7 @@ public addcuenta(){
   Object.values(this.formulario.controls).forEach(control => { control.markAsTouched()});
   if(!this.formulario.invalid){
     this.cuenta = this.formulario.value;
+    this.cuenta.id_login =  this.session.getSession().id_login
     this.cuentacreada();
     this.cuentasService.NuevaCuenta(this.cuenta);
     this.router.navigateByUrl("/mainpage");
