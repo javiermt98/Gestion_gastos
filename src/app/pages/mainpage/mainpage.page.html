@@ -13,7 +13,7 @@
     <ion-list>
       <ion-item> 
         <ion-label>Cuenta</ion-label>
-        <ion-select [(ngModel)]="cuenta" multiple="false">
+        <ion-select [(ngModel)]="cuenta" multiple="false" (ionChange)=actualizacuenta()>
           <ion-select-option *ngFor="let c of cuentas; let i = index" [value]="c">{{c.num_cue}}</ion-select-option>
         </ion-select>
     </ion-item>

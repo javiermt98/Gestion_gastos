@@ -11,12 +11,21 @@ export class GestionarSesionService {
   private isUserLoggedIn:boolean;
   private isUserLoggedIn$:BehaviorSubject<boolean> ;
   public SessionLogged:Isession;
+  private cuentaactual:number;
 
   constructor() { 
     this.isUserLoggedIn$ = new BehaviorSubject<boolean>(false)
     if(sessionStorage.getItem('currentUser') != null){
       this.isUserLoggedIn$.next(true);
     };
+  }
+
+  setCuenta(id_cue){
+    this.cuentaactual = id_cue;
+  }
+
+  getCuenta(){
+    return this.cuentaactual;
   }
 
   setSession(Sesion:Isession) {

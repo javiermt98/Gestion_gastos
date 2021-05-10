@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { icuenta, cuentaVacia } from 'src/app/pojos/icuenta';
+import { icuenta, cuentaVacia, CuentasToAJSON } from 'src/app/pojos/icuenta';
 import { CuentasService } from 'src/app/pages/addcuenta/services/cuenta.service';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -25,8 +25,6 @@ export class MainpagePage implements OnInit {
       this.modificando = false;
     }
 
-    
-    
     this.cuentasService.getCuentas().subscribe({
       next: cuentas =>{
         //Vacio el array para que no me duplique las cuentas ya creadas
@@ -35,17 +33,25 @@ export class MainpagePage implements OnInit {
           if(cuenta.id_login== this.session.getSession().id_login ){
             this.cuentas.push(cuenta);
             this.cuenta = cuenta;
+            this.session.setCuenta(cuenta.id_cue);
+            
           }
         });
 
       }
     });
-
+    
    }
   
   ngOnInit() {
-
     
+    
+  }
+
+  actualizacuenta(){
+    this.session.setCuenta(this.cuenta.id_cue);
+    console.log(this.cuenta);
+    console.log(this.session.getCuenta());
   }
 
   async borrarCuenta(){
@@ -82,9 +88,6 @@ export class MainpagePage implements OnInit {
     });
 
     await alert.present();
-    
-    
-    
   }
 
   

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { iregister } from 'src/app/pojos/iregister';
 import { RegisterService } from './services/register.services';
+import {ShowpasswordComponent} from '../../shared/showpassword/showpassword.component'
 
 @Component({
   selector: 'app-register',
@@ -47,7 +48,7 @@ export class RegisterPage implements OnInit {
     this.formulario = this.fb.group({
       correo_log: (['', Validators.required ]),
       pwd_log:  (['', [Validators.required, Validators.minLength(6)]]),
-      nombre_log: (['', Validators.required ]),
+      nombre_log: (['', Validators.required]),
       apellidos_log: (['', Validators.required ]),
       nacimiento_log: (['', Validators.required ])
     });

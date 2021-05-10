@@ -3,7 +3,8 @@ export interface icategoria{
     nombre_cat:string,
     max_gasto_cat:number,
     icono_cat:string,
-    id_cat_padre?:number;
+    id_cat_padre?:number,
+    id_cue:number,
 }
 
 export function categoriavacia():icategoria{
@@ -13,16 +14,18 @@ export function categoriavacia():icategoria{
     max_gasto_cat:0,
     icono_cat:"",
     id_cat_padre:null,
+    id_cue:0
     }
 }
 
-export function nuevacategoria(a,b,c,d,e):icategoria{
+export function nuevacategoria(a,b,c,d,e,f):icategoria{
     return{
     id_cat:a,
     nombre_cat:b,
     max_gasto_cat:c,
     icono_cat:d,
     id_cat_padre:e,
+    id_cue:f
     }
 }
 
@@ -35,6 +38,7 @@ export function CategoriasToAJSON(data):any{
             max_gasto_cat:	    val[2],
             icono_cat:	        val[3],
             id_cat_padre:	    val[4],
+            id_cue:             val[5]
             }
     });               
 }

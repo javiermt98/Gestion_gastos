@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ShowpasswordComponent} from '../../shared/showpassword/showpassword.component'
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,6 +18,6 @@ import { AppComponent } from 'src/app/app.component';
     LoginPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage, ShowpasswordComponent]
 })
 export class LoginPageModule {}

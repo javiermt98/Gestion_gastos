@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { CategoriasService } from './services/categoria.service';
 import { Router } from '@angular/router';
+import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 
 @Component({
   selector: 'app-addcategoria',
@@ -28,7 +29,8 @@ constructor(public alertController:AlertController,
   public  categoriasService: CategoriasService, 
   public daocategoriasservide: DaoCategoriasService, 
   public fb: FormBuilder,
-  public router:Router) {
+  public router:Router,
+  public session:GestionarSesionService) {
   this.categoriasService.getCategorias().subscribe({
     next: categorias =>{
       this.categorias = categorias;
@@ -53,6 +55,8 @@ public addcategoria(){
   if(!this.formulario.invalid){
     this.categoriacreada();
     this.categoria = this.formulario.value;
+    this.categoria.id_cue = this.session.getCuenta();
+    console.log(this.categoria);
     this.categoriasService.NuevaCategoria(this.categoria);
 
   }

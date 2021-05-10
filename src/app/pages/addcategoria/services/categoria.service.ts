@@ -84,7 +84,7 @@ export class CategoriasService {
       console.log(p);  
       this.DaoCateogiras.Nuevo(p).subscribe((NroReg) => { // Nuevo en la BD
         console.log("que es ok:"+NroReg);       
-        let q=nuevacategoria(NroReg ,p.nombre_cat,p.max_gasto_cat,p.icono_cat,p.id_cat_padre);
+        let q=nuevacategoria(NroReg ,p.nombre_cat,p.max_gasto_cat,p.icono_cat,p.id_cat_padre, p.id_cue);
         let itemIndex = this.categorias.findIndex(item => item.id_cat == NroReg);
         if (itemIndex<0) this.categorias.push(q);  
         this.categorias$.next(this.categorias); // Notifica que el array ha cambiado !!
