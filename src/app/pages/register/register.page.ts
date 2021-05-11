@@ -83,8 +83,14 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  today =  new Date();
+  edadminima = new Date();
+  fechaseleccionada = new Date().toISOString();
+
   ngOnInit() {
     this.crearFormulario();
+    this.edadminima.setFullYear(this.edadminima.getFullYear()-14);
+    this.fechaseleccionada = this.edadminima.toISOString();
   }
 
   get nombreNoValido(){

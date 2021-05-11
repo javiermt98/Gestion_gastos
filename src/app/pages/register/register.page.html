@@ -37,7 +37,7 @@
 
     <div class="form-group ion-padding-bottom">
     <ion-label>Fecha de nacimiento: </ion-label>
-    <ion-input type="date" formControlName="nacimiento_log" class="form-control"></ion-input>
+    <ion-datetime placeholder="Fecha de nacimiento" formControlName="nacimiento_log" [max]="fechaseleccionada" [value]="fechaseleccionada"></ion-datetime>
     <ion-text color="danger"><small *ngIf="nacimientoNoValida" >Tienes que ser mayor de 14 años</small></ion-text>
   </div>
 

@@ -48,7 +48,7 @@
     <div *ngIf="mostrarMovPer()">
       <div  class="form-group ion-padding-bottom">
         <ion-label>Fecha Inicio: </ion-label>
-        <ion-datetime placeholder="Fecha del primer pago" formControlName="fecha_movper" [value]="fechaseleccionada" [max]="today"></ion-datetime>
+        <ion-datetime placeholder="Fecha del primer pago" formControlName="fecha_movper" [value]="fechaseleccionada" [max]="edadminima"></ion-datetime>
         <ion-text color="danger"><small *ngIf="fecha_movperNoValida" >Este campo no puede estar vacío</small></ion-text>
       </div>
       <div  class="form-group ion-padding-bottom">
