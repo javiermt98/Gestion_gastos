@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { iregister } from 'src/app/pojos/iregister';
 import { RegisterService } from './services/register.services';
-import {ShowpasswordComponent} from '../../shared/showpassword/showpassword.component'
 
 @Component({
   selector: 'app-register',
@@ -13,24 +12,44 @@ import {ShowpasswordComponent} from '../../shared/showpassword/showpassword.comp
 })
 export class RegisterPage implements OnInit {
 
-  constructor(public alertController:AlertController,public fb: FormBuilder, public registerSerive: RegisterService, public router:Router) { }
+  constructor(public alertController:AlertController,public fb: FormBuilder, public registerService: RegisterService, public router:Router) { 
+    this.registerService.getRegistros().subscribe({
+      next: registros =>{
+        this.usrRegistrados = registros;
+      }
+    });
 
+
+
+  }
+  usrRegistrados:iregister[];
   formulario: FormGroup;
 
 
-
+  usrRegistrado:boolean = false;
   registro:iregister;
 
   public registrarse(){
+    this.usrRegistrado = false;
     this.registro = this.formulario.value;
     Object.values(this.formulario.controls).forEach(control => { control.markAsTouched()});
     if(this.formulario.invalid){
       this.registronovalido();
     }
     else{
-      this.registerSerive.NuevoRegistro(this.registro);
+      this.usrRegistrados.forEach(usr => {
+        if(usr.correo_log == this.registro.correo_log ){
+          this.usrRegistrado = true;
+        }
+      });
+      if(!this.usrRegistrado){
+        this.registerService.NuevoRegistro(this.registro);
       this.formulario.reset();
       this.router.navigateByUrl('/login')
+      }
+      else{
+        this.correoRepetido();
+      }
     }
   }
 
@@ -38,6 +57,16 @@ export class RegisterPage implements OnInit {
     this.alertController.create({
       header: 'ERROR',  
       message: 'Hay errores en el formulario.',  
+      buttons: ['OK']
+    }).then(res => {
+      res.present();
+    });
+  }
+
+  correoRepetido(){
+    this.alertController.create({
+      header: 'ERROR',  
+      message: 'El correo ya ha sido registrado. Prueba a iniciar sesión o a recuperar su contraseña.',  
       buttons: ['OK']
     }).then(res => {
       res.present();

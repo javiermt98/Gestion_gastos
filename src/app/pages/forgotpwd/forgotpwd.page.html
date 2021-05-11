@@ -7,8 +7,8 @@
 <ion-content class="ion-padding">
   <div class="ion-form ion-padding">
     <label>Escribe tu dirección de correo electrónico para restablecer tu contraseña</label>
-    <ion-input type="text"></ion-input>
-    <ion-button type="submit" fill="outline">RESTABLECER</ion-button>
+    <ion-input type="text" [(ngModel)]="email"></ion-input>
+    <ion-button type="submit" fill="outline" (click)="comprobarEmail()">RESTABLECER</ion-button>
   </div>
 
 </ion-content>
