@@ -52,6 +52,9 @@ public addcuenta(){
     this.router.navigateByUrl("/mainpage");
     
   }
+  else{
+    this.errordatos();
+  }
 }
 
 crearFormulario(){
@@ -60,6 +63,16 @@ crearFormulario(){
     propietario:  (['', Validators.required]),
     nombre_cue:  (['']),
     saldo_cue:  (['', Validators.required])
+  });
+}
+
+errordatos(){
+  this.alertController.create({
+    header: 'ERROR',  
+    message: 'Hay datos mal introducidos. Comprueba los campos en rojo y vuelve a intenarlo.',  
+    buttons: ['OK']
+  }).then(res => {
+    res.present();
   });
 }
 

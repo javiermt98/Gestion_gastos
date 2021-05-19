@@ -75,11 +75,11 @@ export class MovimientosService {
   }
 
     
-    NuevaCuenta(p:imovimiento){
+    NuevoMovimiento(p:imovimiento){
       console.log(p);  
       this.DaoMovimientos.Nuevo(p).subscribe((NroReg) => { // Nuevo en la BD
         console.log("ok:"+NroReg);       
-        let q=nuevomovimiento(NroReg, p.descripcion_mov,p.fecha_mov,p.cantidad_mov,p.id_cue, p.id_cat, p.tipo_mov);
+        let q=nuevomovimiento(NroReg, p.descripcion_mov,p.fecha_mov,p.cantidad_mov, p.id_cat, p.tipo_mov);
         let itemIndex = this.movimientos.findIndex(item => item.id_mov == NroReg);
         if (itemIndex<0) this.movimientos.push(q);  
         this.movimientos$.next(this.movimientos); // Notifica que el array ha cambiado !!

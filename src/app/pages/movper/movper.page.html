@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Movimientos Periódicos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<p>
+  <ion-list>
+    <ion-item> 
+      <ion-label>Movimientos Periódicos</ion-label>
+      <ion-select [(ngModel)]="tiempo" multiple="false">
+        <ion-select-option *ngFor="let g of periodo;" [value]="g">{{g}}</ion-select-option>
+      </ion-select>
+  </ion-item>
+</ion-list>
+<ion-button expand="block" fill="outline" (click)="agregarmovper()">Agregar Movimiento Periódico</ion-button>
+</p>
+</ion-content>

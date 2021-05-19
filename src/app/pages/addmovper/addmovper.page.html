@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
       <ion-button class="btn-title" (click)="backbtn()" fill="outline" color="medium"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
-    <ion-title>Agregar Movimiento</ion-title>
+    <ion-title>Agregar Movimiento Periódico</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,13 +22,13 @@
 
     <div class="form-group ion-padding-bottom">
         <ion-label>Cantidad: </ion-label>
-        <ion-input type="number" formControlName="cantidad_mov" class="form-control"></ion-input>
+        <ion-input type="number" formControlName="cantidad_movper" class="form-control"></ion-input>
         <ion-text color="danger"><small *ngIf="cantidadNoValida" >La cantidad no puede menor de 0</small></ion-text>
     </div>
 
       <div class="form-group ion-padding-bottom">
       <ion-label>Descripción: </ion-label>
-      <ion-input type="text" formControlName="descripcion_mov" class="form-control"></ion-input>
+      <ion-input type="text" formControlName="descripcion_movper" class="form-control"></ion-input>
     </div>
 
     <div class="form-group ion-padding-bottom">
@@ -39,12 +39,18 @@
       <ion-text color="danger"><small *ngIf="categoriaNoValida" >Este campo no puede estar vacío</small></ion-text>
     </div>
 
-    <div class="form-group ion-padding-bottom">
-      <ion-label>Fecha del movimiento: </ion-label>
-      <ion-datetime placeholder="Fecha del movimiento" formControlName="fecha_mov" [max]="today"></ion-datetime>
-      <ion-text color="danger"><small *ngIf="fecha_movNoValida" >Este campo no puede estar vacío</small></ion-text>
+    <div  class="form-group ion-padding-bottom">
+      <ion-label>Fecha Inicio: </ion-label>
+      <ion-datetime placeholder="Fecha del primer pago" formControlName="fecha_movper" [value]="fechaseleccionada" [max]="edadminima"></ion-datetime>
+      <ion-text color="danger"><small *ngIf="fecha_movperNoValida" >Este campo no puede estar vacío</small></ion-text>
     </div>
-    <ion-button type="submit" expand="block" fill="outline" [color]="colorbtn">Agregar {{tipo_mov}}</ion-button>
+    <div  class="form-group ion-padding-bottom">
+      <ion-label>Periodicidad : </ion-label>
+      <ion-input placeholder="Número de días hasta el siguiente pago" formControlName="periodicidad" required="true"></ion-input>
+      <ion-text color="danger"><small *ngIf="periodicidadNoValida" >No puede ser menos de 1 día</small></ion-text>
+    </div>
+
+    <ion-button type="submit" expand="block" fill="outline" [color]="colorbtn">Agregar {{tipo_mov}} Periódico</ion-button>
 
 </form>
 

@@ -20,4 +20,20 @@
   <ion-button expand="block" fill="outline" (click)="backbtn()">Agregar Movimiento</ion-button>
   </p>
 
+  <div *ngFor="let cat of categorias;" class="ion-padding divcards">
+    <ion-card>
+      <ion-item>
+        <ion-icon name="{{cat.icono_cat}}" slot="start"></ion-icon>
+        <ion-label color="success">{{cat.nombre_cat}}</ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngFor="let i of ingresos;">
+      <ion-item *ngIf="i.id_cat == cat.id_cat">
+      <ion-label>{{i.descripcion_mov}}</ion-label>
+      <ion-label>{{i.fecha_mov}}</ion-label>
+      <ion-label>{{i.cantidad_mov}} €</ion-label>
+    </ion-item>
+      </ion-card>
+    </div>
+
 </ion-content>

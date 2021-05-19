@@ -7,21 +7,21 @@ import { icuenta } from 'src/app/pojos/icuenta';
 import { imovimiento, movimientoVacio } from 'src/app/pojos/imovimiento';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 import { CategoriasService } from '../addcategoria/services/categoria.service';
-import { MovimientosService } from './services/movimiento.service';
+import { MovimientosService } from '../addmovimiento/services/movimiento.service';
 
 @Component({
-  selector: 'app-addmovimiento',
-  templateUrl: './addmovimiento.page.html',
-  styleUrls: ['./addmovimiento.page.scss'],
+  selector: 'app-addmovper',
+  templateUrl: './addmovper.page.html',
+  styleUrls: ['./addmovper.page.scss'],
 })
-export class AddmovimientoPage implements OnInit {
+export class AddmovperPage implements OnInit {
 
   public cuenta:icuenta;
   public movimiento:imovimiento = movimientoVacio();
   categorias:icategoria[];
   public categoria:icategoria = categoriavacia();
   public colorbtn:string = "success";
-
+  formulario: FormGroup;
 
   public cambiocolorbtn(){
     if(this.tipo_mov == "Gasto"){
@@ -55,11 +55,16 @@ export class AddmovimientoPage implements OnInit {
   }
 
   public backbtn(){
-    this.router.navigateByUrl("/ingresos")
+    this.router.navigateByUrl("/movper")
   }
 
   seleccion_mov:string[] = ["Ingreso", "Gasto"];
   tipo_mov:string="Ingreso";
+
+  mostrarMovPer(){
+    if(this.tipo_mov=="Movimiento Periódico"){ return true; }
+    else{ return false; }
+  }
 
   today = new Date().toISOString();
 
@@ -89,20 +94,18 @@ export class AddmovimientoPage implements OnInit {
   }
 
   ngOnInit() {
-    this.crearFormularioMov();
+    this.crearFormularioMovPer();
   }
 
 
 
-
-  formulario: FormGroup;
-
-  crearFormularioMov(){
+  crearFormularioMovPer(){
     this.formulario = this.fb.group({
-      descripcion_mov: (['', Validators.required ]),
-      fecha_mov:  (['', Validators.required]),
-      cantidad_mov:  (['', [Validators.required, Validators.min(0)]]),
+      descripcion_movper: (['', Validators.required ]),
+      cantidad_movper:  (['', [Validators.required, Validators.min(0)]]),
       id_cat: (['', Validators.required]),
+      fecha_movper: (['', Validators.required]),
+      periodicidad: (['', [Validators.required, Validators.min(1)]])
     });
   }
 
@@ -128,14 +131,9 @@ export class AddmovimientoPage implements OnInit {
 
 
   fechaseleccionada=new Date().toISOString();
-  get fecha_movNoValida(){
-    return this.formulario.get('fecha_mov').invalid && this.formulario.get('fecha_mov').touched;
-  }
+
   get cantidadNoValida(){
-    return this.formulario.get('cantidad_mov').invalid && this.formulario.get('cantidad_mov').touched;
-  }
-  get diasNoValido(){
-    return this.formulario.get('cantidad_mov').invalid && this.formulario.get('cantidad_mov').touched;
+    return this.formulario.get('cantidad_movper').invalid && this.formulario.get('cantidad_movper').touched;
   }
   get periodicidadNoValida(){
     return this.formulario.get('periodicidad').invalid && this.formulario.get('periodicidad').touched;
@@ -147,5 +145,6 @@ export class AddmovimientoPage implements OnInit {
     return this.formulario.get('id_cat').invalid && this.formulario.get('id_cat').touched;
   }
   
+
 
 }

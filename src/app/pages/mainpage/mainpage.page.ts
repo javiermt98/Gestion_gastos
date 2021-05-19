@@ -12,13 +12,13 @@ import { Isession } from 'src/app/pojos/isession';
   styleUrls: ['./mainpage.page.scss'],
 })
 export class MainpagePage implements OnInit {
-
+  
   modificando:boolean = false;
   colortexto:string = "";
   public currentUser:Isession;
+  public numcuenta:icuenta;
   
-  public cuentas: icuenta[] = [];
-  public cuenta:icuenta = cuentaVacia();
+
 
   constructor(public cuentasService: CuentasService, public router:Router, public alertController:AlertController, public session: GestionarSesionService) {
     if (this.router.url!="http://localhost:8100/mainpage"){
@@ -30,18 +30,19 @@ export class MainpagePage implements OnInit {
         //Vacio el array para que no me duplique las cuentas ya creadas
         this.cuentas = [];
         cuentas.forEach(cuenta => {
-          if(cuenta.id_login== this.session.getSession().id_login ){
+          if(cuenta.id_login == this.session.getSession().id_login ){
             this.cuentas.push(cuenta);
-            this.cuenta = cuenta;
-            this.session.setCuenta(cuenta.id_cue);
-            
+            this.session.setCuenta(cuenta);
           }
         });
 
       }
     });
-    
+
    }
+
+   public cuentas: icuenta[] = [];
+   public cuenta:icuenta = this.session.getCuenta();
   
   ngOnInit() {
     
@@ -49,7 +50,7 @@ export class MainpagePage implements OnInit {
   }
 
   actualizacuenta(){
-    this.session.setCuenta(this.cuenta.id_cue);
+    this.session.setCuenta(this.cuenta);
     console.log(this.cuenta);
     console.log(this.session.getCuenta());
   }

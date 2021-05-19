@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { first } from 'rxjs/operators';
-import { Isession } from 'src/app/pojos/isession';
-import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
-import {RegisterService} from '../register/services/register.services'
 import {LoginService} from './services/login.services'
 
 
@@ -60,9 +56,8 @@ export class LoginPage implements OnInit {
       event.preventDefault(); // Avoid default action for the submit button of the login form
       
       if (this.loginService.Testlogin(this.usr, this.pwd))  { 
-            
-            
-            this.router.navigateByUrl('/mainpage');
+
+            this.router.navigateByUrl("/mainpage");
             
       } else {
              this.registronovalido();

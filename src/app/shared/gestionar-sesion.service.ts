@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Isession } from 'src/app/pojos/isession';
+import { icuenta, cuentaVacia } from '../pojos/icuenta';
 
 
 @Injectable({
@@ -11,21 +12,21 @@ export class GestionarSesionService {
   private isUserLoggedIn:boolean;
   private isUserLoggedIn$:BehaviorSubject<boolean> ;
   public SessionLogged:Isession;
-  private cuentaactual:number;
 
   constructor() { 
     this.isUserLoggedIn$ = new BehaviorSubject<boolean>(false)
     if(sessionStorage.getItem('currentUser') != null){
       this.isUserLoggedIn$.next(true);
     };
+    sessionStorage.setItem('currentAccount', JSON.stringify(cuentaVacia()));
   }
 
-  setCuenta(id_cue){
-    this.cuentaactual = id_cue;
+  setCuenta(cuenta:icuenta){
+    sessionStorage.setItem('currentAccount', JSON.stringify(cuenta));
   }
 
   getCuenta(){
-    return this.cuentaactual;
+    return JSON.parse(sessionStorage.getItem('currentAccount'));
   }
 
   setSession(Sesion:Isession) {
@@ -46,8 +47,9 @@ export class GestionarSesionService {
   
   LogOut():void{
     this.isUserLoggedIn$.next(false);
-
+    this.setCuenta(null);
     sessionStorage.removeItem('currentUser');
+    sessionStorage.setItem('currentAccount', JSON.stringify(cuentaVacia()));
     this.SessionLogged = null;
     this.isUserLoggedIn = false;
     this.isUserLoggedIn$.next(false);

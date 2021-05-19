@@ -64,6 +64,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/logout/logout.module').then( m => m.LogoutPageModule)
   },
   {
+    path: 'addmovper',
+    loadChildren: () => import('./pages/addmovper/addmovper.module').then( m => m.AddmovperPageModule)
+  },
+  {
+    path: 'movper',
+    loadChildren: () => import('./pages/movper/movper.module').then( m => m.MovperPageModule)
+  },
+  {
     path: '**',
     redirectTo:'/404'
   },
@@ -71,6 +79,7 @@ const routes: Routes = [
     path: '404',
     loadChildren: () => import('./pages/notfound404page/notfound404page.module').then( m => m.Notfound404pagePageModule)
   }
+
 
 
 

@@ -25,6 +25,7 @@ export class AppComponent {
     { title: 'Página Principal', url: 'mainpage', icon: 'accessibility'},
     { title: 'Gastos', url: 'gastos', icon: 'remove-circle'},
     { title: 'Ingresos', url: 'ingresos', icon: 'add-circle'},
+    { title: 'Movimiento Periódico', url: 'movper', icon: 'calendar-number'},
     { title: 'Categorías', url: 'categorias', icon: 'file-tray-full'},
     { title: 'Previsión de Gastos', url: 'prevision', icon: 'stats-chart'},
     { title: 'Políticas de Privacidad', url: 'privacy', icon: 'information-circle'},

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { CategoriasService } from './services/categoria.service';
 import { Router } from '@angular/router';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
+import { icuenta } from 'src/app/pojos/icuenta';
 
 @Component({
   selector: 'app-addcategoria',
@@ -21,6 +22,7 @@ botones_menu:string[]=["barbell" ,"boat" ,"diamond","film" ,"cog" ,"water" ,"ham
 formulario: FormGroup;
 categorias:icategoria[];
 iconosel:string = "help-circle-outline";
+cuenta:icuenta;
 
 
 public categoria:icategoria = categoriavacia();
@@ -53,9 +55,11 @@ public addcategoria(){
   //Marca todos los botones como "tocados"
   Object.values(this.formulario.controls).forEach(control => { control.markAsTouched()});
   if(!this.formulario.invalid){
+
     this.categoriacreada();
+    this.cuenta = this.session.getCuenta();
     this.categoria = this.formulario.value;
-    this.categoria.id_cue = this.session.getCuenta();
+    this.categoria.id_cue = this.cuenta.id_cue;
     console.log(this.categoria);
     this.categoriasService.NuevaCategoria(this.categoria);
 
