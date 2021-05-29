@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { categoriavacia, icategoria } from 'src/app/pojos/icategorias';
 import { icuenta } from 'src/app/pojos/icuenta';
-import { imovimiento, movimientoVacio } from 'src/app/pojos/imovimiento';
+import { imovper, movperVacio } from 'src/app/pojos/imovper';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 import { CategoriasService } from '../addcategoria/services/categoria.service';
-import { MovimientosService } from '../addmovimiento/services/movimiento.service';
+import { MovPerService } from './services/movper.service';
 
 @Component({
   selector: 'app-addmovper',
@@ -17,7 +17,7 @@ import { MovimientosService } from '../addmovimiento/services/movimiento.service
 export class AddmovperPage implements OnInit {
 
   public cuenta:icuenta;
-  public movimiento:imovimiento = movimientoVacio();
+  public movimiento:imovper = movperVacio();
   categorias:icategoria[];
   public categoria:icategoria = categoriavacia();
   public colorbtn:string = "success";
@@ -34,7 +34,7 @@ export class AddmovperPage implements OnInit {
 
   constructor(public alertController:AlertController, 
     public fb: FormBuilder, 
-    public movimientoService: MovimientosService, 
+    public movimientoService: MovPerService, 
     public categoriasService:CategoriasService,
     public router:Router,
     public session:GestionarSesionService) { 
@@ -61,11 +61,6 @@ export class AddmovperPage implements OnInit {
   seleccion_mov:string[] = ["Ingreso", "Gasto"];
   tipo_mov:string="Ingreso";
 
-  mostrarMovPer(){
-    if(this.tipo_mov=="Movimiento Periódico"){ return true; }
-    else{ return false; }
-  }
-
   today = new Date().toISOString();
 
   public addmovimiento(){
@@ -78,13 +73,13 @@ export class AddmovperPage implements OnInit {
       
       if(this.tipo_mov == "Ingreso"){
         this.movimiento = this.formulario.value;
-        this.movimiento.tipo_mov = 1;
+        this.movimiento.tipo_movper = 1;
         this.movimientoService.NuevoMovimiento(this.movimiento);
         this.movimientoregistrado();
       }
       else{
         this.movimiento = this.formulario.value;
-        this.movimiento.tipo_mov = 0;
+        this.movimiento.tipo_movper = 0;
         this.movimientoService.NuevoMovimiento(this.movimiento);
         this.movimientoregistrado();
       }
@@ -101,11 +96,12 @@ export class AddmovperPage implements OnInit {
 
   crearFormularioMovPer(){
     this.formulario = this.fb.group({
-      descripcion_movper: (['', Validators.required ]),
+      periodicidad: (['', [Validators.required, Validators.min(1)]]),
+      fecha_movper: (['', Validators.required]),
       cantidad_movper:  (['', [Validators.required, Validators.min(0)]]),
       id_cat: (['', Validators.required]),
-      fecha_movper: (['', Validators.required]),
-      periodicidad: (['', [Validators.required, Validators.min(1)]])
+      descripcion_movper: (['', Validators.required ]),
+      
     });
   }
 

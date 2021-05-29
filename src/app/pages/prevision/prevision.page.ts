@@ -71,6 +71,8 @@ export class PrevisionPage implements OnInit {
   });
   }
 
+  
+
   public rellenararrays(){
     this.categorias.forEach(categoria => {
       this.nombrecategorias.push(categoria.nombre_cat);
@@ -80,6 +82,13 @@ export class PrevisionPage implements OnInit {
 
 
   ngOnInit() {
+    //Recarga la página una vez
+    if (!localStorage.getItem('reload')) { 
+      localStorage.setItem('reload', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('reload') 
+    }
     
     
   }
@@ -93,6 +102,21 @@ export class PrevisionPage implements OnInit {
 
   createBarChart() {
     this.bars = new Chart(this.barChart.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: this.nombrecategorias,
+        datasets: [{
+          label: 'Gasto en Euros',
+          data: this.totalcategorias,
+          backgroundColor: 'rgb(231, 41, 0)', 
+          borderColor: 'rgb(0, 0, 0)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+      }
+    });
+        this.bars = new Chart(this.barChart.nativeElement, {
       type: 'bar',
       data: {
         labels: this.nombrecategorias,

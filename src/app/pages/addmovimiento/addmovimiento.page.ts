@@ -7,6 +7,7 @@ import { icuenta } from 'src/app/pojos/icuenta';
 import { imovimiento, movimientoVacio } from 'src/app/pojos/imovimiento';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 import { CategoriasService } from '../addcategoria/services/categoria.service';
+import { CuentasService } from '../addcuenta/services/cuenta.service';
 import { MovimientosService } from './services/movimiento.service';
 
 @Component({
@@ -21,10 +22,11 @@ export class AddmovimientoPage implements OnInit {
   categorias:icategoria[];
   public categoria:icategoria = categoriavacia();
   public colorbtn:string = "success";
-
+  seleccion_mov:string[] = ["Ingresos", "Gastos"];
+  tipo_mov:string="Ingresos";
 
   public cambiocolorbtn(){
-    if(this.tipo_mov == "Gasto"){
+    if(this.tipo_mov == "Gastos"){
       this.colorbtn = "danger"
     }
     else{
@@ -37,7 +39,8 @@ export class AddmovimientoPage implements OnInit {
     public movimientoService: MovimientosService, 
     public categoriasService:CategoriasService,
     public router:Router,
-    public session:GestionarSesionService) { 
+    public session:GestionarSesionService,
+    public cuentasService: CuentasService) { 
 
       this.cuenta = this.session.getCuenta();
 
@@ -55,11 +58,10 @@ export class AddmovimientoPage implements OnInit {
   }
 
   public backbtn(){
-    this.router.navigateByUrl("/ingresos")
+    this.router.navigateByUrl("/"+this.tipo_mov.toLowerCase())
   }
 
-  seleccion_mov:string[] = ["Ingreso", "Gasto"];
-  tipo_mov:string="Ingreso";
+
 
   today = new Date().toISOString();
 
@@ -71,16 +73,22 @@ export class AddmovimientoPage implements OnInit {
     }
     else{
       
-      if(this.tipo_mov == "Ingreso"){
+      if(this.tipo_mov == "Ingresos"){
         this.movimiento = this.formulario.value;
         this.movimiento.tipo_mov = 1;
         this.movimientoService.NuevoMovimiento(this.movimiento);
+        this.cuenta.saldo_cue = this.cuenta.saldo_cue + this.movimiento.cantidad_mov;
+        this.cuentasService.UpdateCuenta(this.cuenta);
+        this.session.setCuenta(this.cuenta);
         this.movimientoregistrado();
       }
       else{
         this.movimiento = this.formulario.value;
         this.movimiento.tipo_mov = 0;
         this.movimientoService.NuevoMovimiento(this.movimiento);
+        this.cuenta.saldo_cue = this.cuenta.saldo_cue - this.movimiento.cantidad_mov;
+        this.cuentasService.UpdateCuenta(this.cuenta);
+        this.session.setCuenta(this.cuenta);
         this.movimientoregistrado();
       }
 

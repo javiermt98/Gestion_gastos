@@ -8,15 +8,39 @@
 </ion-header>
 
 <ion-content>
-<p>
-  <ion-list>
-    <ion-item> 
-      <ion-label>Movimientos Periódicos</ion-label>
-      <ion-select [(ngModel)]="tiempo" multiple="false">
-        <ion-select-option *ngFor="let g of periodo;" [value]="g">{{g}}</ion-select-option>
-      </ion-select>
+  <p>
+    <ion-list>
+      <ion-item> 
+        <ion-label>Movimientos Periódicos</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" fill="outline" (click)="agregarmovper()">Agregar Movimiento Periódico</ion-button> 
+  <ion-button expand="block" fill="outline" color="danger" (click)="borrando = !borrando">Borrar Movimiento Periódico</ion-button>
+
+    
+  </p>
+
+
+<div *ngFor="let cat of categorias;" class="ion-padding divcards"> 
+  <ion-card >
+      <ion-item >
+        <ion-icon name="{{cat.icono_cat}}" slot="start"></ion-icon>
+        <ion-label color="tertiary">{{cat.nombre_cat}}</ion-label>
+        <ion-label color="tertiary" *ngIf="cat.total_cat != 0">Total: {{cat.total_cat}}€</ion-label>
+    </ion-item>
+  </ion-card>
+
+
+  <ion-card *ngFor="let g of movimientosperiodicos;">
+    <ion-item *ngIf="g.id_cat == cat.id_cat">
+    <ion-label>{{g.descripcion_movper}}</ion-label>
+    <ion-label>{{g.fecha_movper | date:'shortDate'}}</ion-label>
+    <ion-label>{{g.cantidad_movper}} €</ion-label>
+    <ion-label>Cada {{g.periodicidad}} días</ion-label>
+    <ion-button *ngIf="borrando" (click)="borrarmovper(g.id_movper)" fill="outline" color="danger"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
+
   </ion-item>
-</ion-list>
-<ion-button expand="block" fill="outline" (click)="agregarmovper()">Agregar Movimiento Periódico</ion-button>
-</p>
+    </ion-card>
+  </div>
+
 </ion-content>

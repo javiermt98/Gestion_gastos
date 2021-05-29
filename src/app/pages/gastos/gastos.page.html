@@ -18,6 +18,7 @@
   </ion-item>
 </ion-list>
 <ion-button expand="block" fill="outline" (click)="backbtn()">Agregar Movimiento</ion-button>
+<ion-button expand="block" fill="outline" color="danger" (click)="borrando = !borrando">Borrar Movimiento</ion-button>
 </p>
 
   <div *ngFor="let cat of categorias;" class="ion-padding divcards"> 
@@ -39,6 +40,7 @@
       <ion-label>{{g.descripcion_mov}}</ion-label>
       <ion-label>{{g.fecha_mov | date:'shortDate'}}</ion-label>
       <ion-label>{{g.cantidad_mov}} €</ion-label>
+      <ion-button *ngIf="borrando" (click)="borrarmov(g)" fill="outline" color="danger"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
     </ion-item>
       </ion-card>
     </div>

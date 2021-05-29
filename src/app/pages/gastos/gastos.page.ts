@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { icategoria } from 'src/app/pojos/icategorias';
+import { icuenta } from 'src/app/pojos/icuenta';
 import { imovimiento } from 'src/app/pojos/imovimiento';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
 import { CategoriasService } from '../addcategoria/services/categoria.service';
+import { CuentasService } from '../addcuenta/services/cuenta.service';
 import { MovimientosService } from '../addmovimiento/services/movimiento.service';
 
 @Component({
@@ -20,11 +22,16 @@ export class GastosPage implements OnInit {
   periodo:string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Total" ];
   mes:string=this.periodo[new Date().getMonth()];
   public gastosFiltrados:imovimiento[] = [];
+  borrando:boolean = false;
+  cuenta:icuenta;
+
 
   constructor(public router:Router, 
     public movimientoService: MovimientosService, 
     public categoriasService:CategoriasService, 
-    public session:GestionarSesionService ) { 
+    public session:GestionarSesionService,
+    public cuentasService : CuentasService,
+    ) { 
 
       this.gastos = [];
       this.categorias = [];
@@ -86,6 +93,13 @@ export class GastosPage implements OnInit {
 
   ngOnInit() {
     this.filtrarGastos();
+  }
+
+  public borrarmov(movimiento:imovimiento){
+    this.movimientoService.EliminaMovimiento(movimiento.id_mov);
+    this.cuenta.saldo_cue = this.cuenta.saldo_cue + movimiento.cantidad_mov;
+    this.cuentasService.UpdateCuenta(this.cuenta);
+    this.session.setCuenta(this.cuenta);
   }
 
 }

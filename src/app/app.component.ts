@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 import { GestionarSesionService } from './shared/gestionar-sesion.service';
 @Component({
   selector: 'app-root',
