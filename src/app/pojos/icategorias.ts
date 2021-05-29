@@ -5,6 +5,7 @@ export interface icategoria{
     icono_cat:string,
     id_cat_padre?:number,
     id_cue:number,
+    total_cat?:number,
 }
 
 export function categoriavacia():icategoria{
@@ -38,7 +39,8 @@ export function CategoriasToAJSON(data):any{
             max_gasto_cat:	    val[2],
             icono_cat:	        val[3],
             id_cat_padre:	    val[4],
-            id_cue:             val[5]
+            id_cue:             val[5],
+            total_cat:          0,
             }
     });               
 }

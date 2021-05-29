@@ -18,7 +18,7 @@ export class GestionarSesionService {
     if(sessionStorage.getItem('currentUser') != null){
       this.isUserLoggedIn$.next(true);
     };
-    sessionStorage.setItem('currentAccount', JSON.stringify(cuentaVacia()));
+    
   }
 
   setCuenta(cuenta:icuenta){

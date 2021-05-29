@@ -12,7 +12,7 @@
   <ion-list>
     <ion-item> 
       <ion-label>Gastos</ion-label>
-      <ion-select [(ngModel)]="tiempo" multiple="false">
+      <ion-select [(ngModel)]="mes" multiple="false" (ionChange)="filtrarGastos()">
         <ion-select-option *ngFor="let g of periodo;" [value]="g">{{g}}</ion-select-option>
       </ion-select>
   </ion-item>
@@ -20,26 +20,28 @@
 <ion-button expand="block" fill="outline" (click)="backbtn()">Agregar Movimiento</ion-button>
 </p>
 
-<div *ngFor="let cat of categorias;" class="ion-padding divcards">
-  <ion-card>
-    <ion-item>
-      <ion-icon name="{{cat.icono_cat}}" slot="start"></ion-icon>
-      <ion-label color="danger">{{cat.nombre_cat}}</ion-label>
-    </ion-item>
-  </ion-card>
-  <ion-card *ngFor="let subcat of cat.id_cat_padre;">
-    <ion-item>
-      <ion-icon name="{{subcat.icono_cat}}" slot="start"></ion-icon>
-      <ion-label color="success">{{subcat.nombre_cat}}</ion-label>
-    </ion-item>
-  </ion-card>
-  <ion-card *ngFor="let g of gastos;">
-    <ion-item *ngIf="g.id_cat == cat.id_cat">
-    <ion-label>{{g.descripcion_mov}}</ion-label>
-    <ion-label>{{g.fecha_mov}}</ion-label>
-    <ion-label>{{g.cantidad_mov}} €</ion-label>
-  </ion-item>
+  <div *ngFor="let cat of categorias;" class="ion-padding divcards"> 
+    <ion-card >
+        <ion-item >
+          <ion-icon name="{{cat.icono_cat}}" slot="start"></ion-icon>
+          <ion-label color="danger">{{cat.nombre_cat}}</ion-label>
+          <ion-label color="danger" *ngIf="cat.total_cat != 0">Total: {{cat.total_cat}}€</ion-label>
+          <ion-label color="danger" *ngIf="cat.max_gasto_cat != 0">Máximo: {{cat.max_gasto_cat}}€</ion-label>
+      </ion-item>
+      <ion-item *ngIf="cat.total_cat > cat.max_gasto_cat && cat.max_gasto_cat != 0">
+        <ion-label color="warning" >Has superado el gasto máximo en {{cat.nombre_cat}} por {{cat.total_cat - cat.max_gasto_cat}}€</ion-label>
+      </ion-item>
     </ion-card>
-  </div>
+
+
+    <ion-card *ngFor="let g of gastosFiltrados;">
+      <ion-item *ngIf="g.id_cat == cat.id_cat">
+      <ion-label>{{g.descripcion_mov}}</ion-label>
+      <ion-label>{{g.fecha_mov | date:'shortDate'}}</ion-label>
+      <ion-label>{{g.cantidad_mov}} €</ion-label>
+    </ion-item>
+      </ion-card>
+    </div>
+
 
 </ion-content>

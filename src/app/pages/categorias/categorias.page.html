@@ -13,12 +13,13 @@
     <ion-item>
       <ion-icon name="{{cat.icono_cat}}" slot="start"></ion-icon>
       <ion-label>{{cat.nombre_cat}}</ion-label>
-      <ion-label >{{cat.max_gasto_cat}}</ion-label>
+      <ion-label *ngIf="cat.max_gasto_cat != 0">{{cat.max_gasto_cat}}</ion-label>
+      <ion-button *ngIf="borrando" (click)="borrarcategoria(cat.id_cat)" fill="outline" color="danger"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
     </ion-item>
   </ion-card>
 
   <ion-button expand="block" fill="outline" (click)="addccategoria()">Agregar Categoría</ion-button>
-  <ion-button expand="block" fill="outline">Borrar Categoría</ion-button>
+  <ion-button expand="block" fill="outline" (click)="borrando = !borrando">Borrar Categoría</ion-button>
   
 
 </ion-content>

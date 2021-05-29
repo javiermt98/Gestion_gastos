@@ -37,7 +37,7 @@ export function MovimientoToAJSON(data):any{
         return {
             id_mov:		        val[0],
             descripcion_mov:	val[1],
-            fecha_mov:	        val[2],
+            fecha_mov:	        new Date(val[2]),
             cantidad_mov:	    val[3],
             id_cat:             val[4],
             tipo_mov:           val[5]

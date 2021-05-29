@@ -17,7 +17,8 @@ export class MainpagePage implements OnInit {
   colortexto:string = "";
   public currentUser:Isession;
   public numcuenta:icuenta;
-  
+  public cuentas: icuenta[] = [];
+  public cuenta:icuenta = cuentaVacia();
 
 
   constructor(public cuentasService: CuentasService, public router:Router, public alertController:AlertController, public session: GestionarSesionService) {
@@ -32,17 +33,22 @@ export class MainpagePage implements OnInit {
         cuentas.forEach(cuenta => {
           if(cuenta.id_login == this.session.getSession().id_login ){
             this.cuentas.push(cuenta);
-            this.session.setCuenta(cuenta);
+            if(this.session.getCuenta() == null){
+              this.session.setCuenta(cuenta);
+            }
           }
         });
 
       }
     });
 
+    if(this.session.getCuenta() != null){
+      this.cuenta = this.session.getCuenta();
+    }
+
    }
 
-   public cuentas: icuenta[] = [];
-   public cuenta:icuenta = this.session.getCuenta();
+
   
   ngOnInit() {
     

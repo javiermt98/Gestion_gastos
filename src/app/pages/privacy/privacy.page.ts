@@ -9,6 +9,8 @@ export class PrivacyPage implements OnInit {
 
   constructor() { }
 
+  public year = new Date().getFullYear();
+
   ngOnInit() {
   }
 

@@ -17,8 +17,9 @@ export class GastosPage implements OnInit {
   public gasto:imovimiento;
   public categorias:icategoria[];
   public categoria:icategoria;
-  periodo:string[] = ["Semana", "Mes", "Año", "Total"];
-  tiempo:string="Total";
+  periodo:string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Total" ];
+  mes:string=this.periodo[new Date().getMonth()];
+  public gastosFiltrados:imovimiento[] = [];
 
   constructor(public router:Router, 
     public movimientoService: MovimientosService, 
@@ -27,36 +28,64 @@ export class GastosPage implements OnInit {
 
       this.gastos = [];
       this.categorias = [];
-      console.log(this.session.getCuenta().id_cue)
-    this.categoriasService.getCategorias().subscribe({
-      next: categorias =>{
-        this.categorias = [];
-        categorias.forEach(categoria => {
-          if(categoria.id_cue == this.session.getCuenta().id_cue){
-          this.categorias.push(categoria)
-          }
-        })
-      }
-    });
-
-    this.movimientoService.getMovimientos().subscribe({
-      next: gastos =>{
-        this.gastos = [];
-        gastos.forEach(gasto => {
-          if(gasto.tipo_mov == 0){
-              this.gastos.push(gasto);
-            }
-        })
-      }
-    });
+      setTimeout(() => {
+        this.filtrarGastos();
+      }, 100);
+      
+    
 }
 
   public backbtn(){
     this.router.navigateByUrl("/addmovimiento")
   }
 
-  ngOnInit() {
+  filtrarGastos(){
+    this.movimientoService.getMovimientos().subscribe({
+      next: gastos =>{
+        this.gastos = [];
+        this.gastosFiltrados = [];
+        gastos.forEach(gasto => {
+          if(gasto.tipo_mov == 0){
+              this.gastos.push(gasto);
+              if(this.mes == "Total"){
+                this.gastosFiltrados.push(gasto)
+              }
+              else{
+                if(new Date(gasto.fecha_mov).getMonth() == this.periodo.indexOf(this.mes) && new Date(gasto.fecha_mov).getFullYear() == new Date().getFullYear()){
+                  this.gastosFiltrados.push(gasto);
+                  
+                }
+              }
+            }
+        })
+      }
+    });
 
+    this.categoriasService.getCategorias().subscribe({
+      next: categorias =>{
+        this.categorias = [];
+        categorias.forEach(categoria => {
+          categoria.total_cat = 0;
+          if(categoria.id_cue == this.session.getCuenta().id_cue){
+            this.gastosFiltrados.forEach(gasto => {
+              if(gasto.tipo_mov == 0 && gasto.id_cat == categoria.id_cat){
+                categoria.total_cat = gasto.cantidad_mov + categoria.total_cat;
+                if(this.categorias.indexOf(categoria) == -1) //Comprobar que la categoría no esté ya en la lista
+                {
+                  this.categorias.push(categoria);
+                }
+                
+                }
+            })
+          
+          }
+        })
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.filtrarGastos();
   }
 
 }

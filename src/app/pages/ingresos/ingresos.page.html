@@ -12,7 +12,7 @@
     <ion-list>
       <ion-item> 
         <ion-label>Ingresos</ion-label>
-        <ion-select [(ngModel)]="tiempo" multiple="false">
+        <ion-select [(ngModel)]="mes" multiple="false" (ionChange)="filtrarIngresos()">
           <ion-select-option *ngFor="let g of periodo;" [value]="g">{{g}}</ion-select-option>
         </ion-select>
     </ion-item>
@@ -27,10 +27,10 @@
         <ion-label color="success">{{cat.nombre_cat}}</ion-label>
       </ion-item>
     </ion-card>
-    <ion-card *ngFor="let i of ingresos;">
+    <ion-card *ngFor="let i of ingresosFiltrados;">
       <ion-item *ngIf="i.id_cat == cat.id_cat">
       <ion-label>{{i.descripcion_mov}}</ion-label>
-      <ion-label>{{i.fecha_mov}}</ion-label>
+      <ion-label>{{i.fecha_mov | date:'shortDate'}}</ion-label>
       <ion-label>{{i.cantidad_mov}} €</ion-label>
     </ion-item>
       </ion-card>
