@@ -74,12 +74,14 @@ export class AddmovperPage implements OnInit {
       if(this.tipo_mov == "Ingreso"){
         this.movimiento = this.formulario.value;
         this.movimiento.tipo_movper = 1;
+        console.log(this.movimiento)
         this.movimientoService.NuevoMovimiento(this.movimiento);
         this.movimientoregistrado();
       }
       else{
         this.movimiento = this.formulario.value;
         this.movimiento.tipo_movper = 0;
+        console.log(this.movimiento)
         this.movimientoService.NuevoMovimiento(this.movimiento);
         this.movimientoregistrado();
       }

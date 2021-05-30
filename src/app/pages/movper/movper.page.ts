@@ -26,9 +26,10 @@ export class MovperPage implements OnInit {
         this.movimientosperiodicos = movpers;
         movpers.forEach( movimiento =>{
           var date = new Date(movimiento.fecha_movper);
-          console.log(date);
-          console.log(date.setDate(date.getDate()+movimiento.periodicidad));
-
+          if(new Date(movimiento.fecha_movper)<new Date()){
+            
+            this.movpertomovimiento(movimiento, date);
+          }
         });
         }
       
@@ -63,19 +64,24 @@ export class MovperPage implements OnInit {
     this.router.navigateByUrl("/addmovper")
   }
 
-  public movpertomovimiento(movimiento, date){
-    if(new Date(date.getDate()+movimiento.periodicidad) < new Date()){
+  // añade un movimiento cuando la fecha actual sea la fecha de mov + periodicidad
+  public movpertomovimiento(movimiento:imovper, date:Date){
+    do{
       var mov:imovimiento = movimientoVacio();
       mov.cantidad_mov = movimiento.cantidad_movper;
       mov.descripcion_mov = movimiento.descripcion_movper;
-      mov.fecha_mov = new Date(date.getDate()+movimiento.periodicidad).toISOString();
+      mov.fecha_mov = new Date(movimiento.fecha_movper).toISOString();
       mov.id_cat = movimiento.id_cat;
       mov.tipo_mov = movimiento.tipo_movper;
       this.movimientosService.NuevoMovimiento(mov);
-      movimiento.fecha_movper = new Date().toISOString();
+      
+      movimiento.fecha_movper = new Date(date.setDate(date.getDate()+movimiento.periodicidad)).toISOString();
       this.movperservice.UpdateMovimiento(movimiento);
-    }
+      console.log(date)
+    }while(new Date(date) <= new Date());
+    
   }
+    
 
   public borrarmovper(id_movper:number){
     this.movperservice.EliminaMovimiento(id_movper);

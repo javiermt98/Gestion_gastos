@@ -26,7 +26,8 @@ export class GestionarSesionService {
   }
 
   getCuenta(){
-    return JSON.parse(sessionStorage.getItem('currentAccount'));
+    var cuenta:icuenta = JSON.parse(sessionStorage.getItem('currentAccount'))
+    return cuenta;
   }
 
   setSession(Sesion:Isession) {

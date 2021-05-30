@@ -92,9 +92,6 @@ export class IngresosPage implements OnInit {
   
   public borrarmov(movimiento:imovimiento){
     this.movimientoService.EliminaMovimiento(movimiento.id_mov);
-    this.cuenta.saldo_cue = this.cuenta.saldo_cue - movimiento.cantidad_mov;
-    this.cuentasService.UpdateCuenta(this.cuenta);
-    this.session.setCuenta(this.cuenta);
   }
 
   ngOnInit() {

@@ -33,9 +33,17 @@ constructor(public alertController:AlertController,
   public fb: FormBuilder,
   public router:Router,
   public session:GestionarSesionService) {
+    this.cuenta = this.session.getCuenta();
   this.categoriasService.getCategorias().subscribe({
     next: categorias =>{
-      this.categorias = categorias;
+      this.categorias = [];
+      categorias.forEach(categoria => {
+        
+       if(categoria.id_cue = this.cuenta.id_cue){
+        console.log(categoria)
+         this.categorias.push(categoria);
+       }
+      })
     }
   });
 }

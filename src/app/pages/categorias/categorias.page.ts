@@ -19,7 +19,7 @@ export class CategoriasPage implements OnInit {
   public borrando:boolean = false;
   public movimientos:imovimiento[];
 
-  constructor(public categoriasService: CategoriasService,public router: Router, public session: GestionarSesionService, public movimientoService: MovimientosService) {
+  constructor(public categoriasService: CategoriasService,public router: Router, public session: GestionarSesionService) {
     this.cuenta = this.session.getCuenta();
     this.categoriasService.getCategorias().subscribe({
       next: categorias =>{
@@ -31,25 +31,11 @@ export class CategoriasPage implements OnInit {
         })
       }
     });
-
-    this.movimientoService.getMovimientos().subscribe({
-      next: gastos =>{
-        this.movimientos = gastos;
-      }
-    });
-
     console.log(this.session.getCuenta());
 
    }
 
    public borrarcategoria(id_cat:number){
-     console.log(id_cat);
-     this.movimientos.forEach(movimiento => {
-       if(movimiento.id_cat == id_cat){
-         this.movimientoService.EliminaMovimiento(movimiento.id_mov);
-       }
-       
-     });
     this.categoriasService.EliminaCategoria(id_cat);
    }
 

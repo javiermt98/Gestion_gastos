@@ -33,7 +33,7 @@
       <ion-label>{{i.descripcion_mov}}</ion-label>
       <ion-label>{{i.fecha_mov | date:'shortDate'}}</ion-label>
       <ion-label>{{i.cantidad_mov}} €</ion-label>
-      <ion-button *ngIf="borrando" (click)="borrarmov(g)" fill="outline" color="danger"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
+      <ion-button *ngIf="borrando" (click)="borrarmov(i)" fill="outline" color="danger"><ion-icon name="trash-outline" color="danger"></ion-icon></ion-button>
 
     </ion-item>
       </ion-card>

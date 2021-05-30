@@ -22,9 +22,6 @@ export class MainpagePage implements OnInit {
 
 
   constructor(public cuentasService: CuentasService, public router:Router, public alertController:AlertController, public session: GestionarSesionService) {
-    if (this.router.url!="http://localhost:8100/mainpage"){
-      this.modificando = false;
-    }
 
     this.cuentasService.getCuentas().subscribe({
       next: cuentas =>{
@@ -36,22 +33,25 @@ export class MainpagePage implements OnInit {
             if(this.session.getCuenta() == null){
               this.session.setCuenta(cuenta);
             }
+            else if(this.session.getCuenta()!= null && this.session.getCuenta().id_cue == cuenta.id_cue && this.session.getCuenta().saldo_cue != cuenta.saldo_cue){
+              this.session.setCuenta(cuenta);
+            }
           }
         });
 
       }
     });
 
-    if(this.session.getCuenta() != null){
       this.cuenta = this.session.getCuenta();
-    }
 
    }
 
 
   
   ngOnInit() {
-    
+    if(this.cuenta == null){
+      this.cuenta = cuentaVacia();
+    } 
     
   }
 
