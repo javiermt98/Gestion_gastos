@@ -30,7 +30,7 @@ export class IngresosPage implements OnInit {
     public categoriasService:CategoriasService, 
     public session:GestionarSesionService,
     public cuentasService : CuentasService ) {
-
+      this.cuenta = this.session.getCuenta();
       // Así le doy tiempo a la página para que cargue antes de rellenar los arrays
       setTimeout(() => {
         this.filtrarIngresos();

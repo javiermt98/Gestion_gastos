@@ -32,7 +32,7 @@ export class GastosPage implements OnInit {
     public session:GestionarSesionService,
     public cuentasService : CuentasService,
     ) { 
-
+      this.cuenta = this.session.getCuenta();
       this.gastos = [];
       this.categorias = [];
       setTimeout(() => {
