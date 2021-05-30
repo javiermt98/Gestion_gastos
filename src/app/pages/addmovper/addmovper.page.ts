@@ -100,7 +100,7 @@ export class AddmovperPage implements OnInit {
     this.formulario = this.fb.group({
       periodicidad: (['', [Validators.required, Validators.min(1)]]),
       fecha_movper: (['', Validators.required]),
-      cantidad_movper:  (['', [Validators.required, Validators.min(0)]]),
+      cantidad_movper:  (['', [Validators.required, Validators.min(1)]]),
       id_cat: (['', Validators.required]),
       descripcion_movper: (['', Validators.required ]),
       
@@ -129,6 +129,7 @@ export class AddmovperPage implements OnInit {
 
 
   fechaseleccionada=new Date().toISOString();
+  fechaminima = new Date().toISOString();
 
   get cantidadNoValida(){
     return this.formulario.get('cantidad_movper').invalid && this.formulario.get('cantidad_movper').touched;

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
+import { map } from 'rxjs/operators';
 import { icategoria } from 'src/app/pojos/icategorias';
 import { imovimiento } from 'src/app/pojos/imovimiento';
 import { GestionarSesionService } from 'src/app/shared/gestionar-sesion.service';
@@ -16,8 +17,10 @@ export class PrevisionPage implements OnInit {
   public categorias:icategoria[];
   public nombrecategorias:string[] = [];
   public totalcategorias:number[] = [];
-  tiempo:string[] = ["Semanal","Mensual","Anual"];
-  periodo:string="Mensual";
+  tiempo:string[] = ["Mensual","Anual"];
+  eleccion:string="Mensual";
+  periodo:string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", "Total" ];
+  mes:string=this.periodo[new Date().getMonth()];
   bars: any;
   colorArray: any;
   @ViewChild('barChart') barChart;
@@ -29,15 +32,19 @@ export class PrevisionPage implements OnInit {
     
     this.gastos = [];
     this.categorias = [];
+    this.filtrarprevgastos();
 
-    this.movimientoService.getMovimientos().subscribe({
+
+  }
+
+  filtrarprevgastos(){
+    this.movimientoService.getMovimientos().pipe(
+      map(gastos => gastos.filter
+          (gasto => new Date(gasto.fecha_mov).getMonth()==this.periodo.indexOf(this.mes) && gasto.tipo_mov == 0)
+        )
+      ).subscribe({
       next: gastos =>{
-        this.gastos = [];
-        gastos.forEach(gasto => {
-          if(gasto.tipo_mov == 0){
-              this.gastos.push(gasto);
-            }
-        })
+        this.gastos = gastos;
       }
     });
 
@@ -69,11 +76,12 @@ export class PrevisionPage implements OnInit {
       })
     }
   });
+
   }
 
-  
-
   public rellenararrays(){
+    this.nombrecategorias = [];
+    this.totalcategorias = [];
     this.categorias.forEach(categoria => {
       this.nombrecategorias.push(categoria.nombre_cat);
       this.totalcategorias.push(categoria.total_cat);
@@ -95,35 +103,27 @@ export class PrevisionPage implements OnInit {
 
   //Se ejecuta después de cargar una página. 
   ionViewWillEnter() {
-    
+    this.generateColorArray();
     this.createBarChart();
     this.rellenararrays();
   }
 
+  generateColorArray() {
+    this.colorArray = [];
+    for (let i = 0; i < this.nombrecategorias.length; i++) {
+      this.colorArray.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+    }
+  }
+
   createBarChart() {
-    this.bars = new Chart(this.barChart.nativeElement, {
-      type: 'bar',
+      this.bars = new Chart(this.barChart.nativeElement, {
+      type: 'pie',
       data: {
         labels: this.nombrecategorias,
         datasets: [{
           label: 'Gasto en Euros',
           data: this.totalcategorias,
-          backgroundColor: 'rgb(231, 41, 0)', 
-          borderColor: 'rgb(0, 0, 0)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-      }
-    });
-        this.bars = new Chart(this.barChart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: this.nombrecategorias,
-        datasets: [{
-          label: 'Gasto en Euros',
-          data: this.totalcategorias,
-          backgroundColor: 'rgb(231, 41, 0)', 
+          backgroundColor: this.colorArray, 
           borderColor: 'rgb(0, 0, 0)',
           borderWidth: 1
         }]

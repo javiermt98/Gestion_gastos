@@ -26,8 +26,7 @@ export class MovperPage implements OnInit {
         this.movimientosperiodicos = movpers;
         movpers.forEach( movimiento =>{
           var date = new Date(movimiento.fecha_movper);
-          if(new Date(movimiento.fecha_movper)<new Date()){
-            
+          if(new Date(date.setDate(date.getDate()+movimiento.periodicidad))==new Date()){
             this.movpertomovimiento(movimiento, date);
           }
         });
@@ -66,7 +65,6 @@ export class MovperPage implements OnInit {
 
   // añade un movimiento cuando la fecha actual sea la fecha de mov + periodicidad
   public movpertomovimiento(movimiento:imovper, date:Date){
-    do{
       var mov:imovimiento = movimientoVacio();
       mov.cantidad_mov = movimiento.cantidad_movper;
       mov.descripcion_mov = movimiento.descripcion_movper;
@@ -77,9 +75,6 @@ export class MovperPage implements OnInit {
       
       movimiento.fecha_movper = new Date(date.setDate(date.getDate()+movimiento.periodicidad)).toISOString();
       this.movperservice.UpdateMovimiento(movimiento);
-      console.log(date)
-    }while(new Date(date) <= new Date());
-    
   }
     
 
