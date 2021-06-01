@@ -42,14 +42,14 @@ export class IngresosPage implements OnInit {
     this.router.navigateByUrl("/addmovimiento")
   }
 
-  filtrarIngresos(){
+  async filtrarIngresos(){
     this.ingresosFiltrados = [];
     this.categorias = [];
       if(this.mes == "Total"){
-        this.movimientoService.getMovimientos().subscribe({next: ingresos => this.ingresosFiltrados = ingresos})
+        await this.movimientoService.getMovimientos().subscribe({next: ingresos => this.ingresosFiltrados = ingresos})
       }
       else{
-      this.movimientoService.getMovimientos().pipe(
+      await this.movimientoService.getMovimientos().pipe(
         map(ingresos => ingresos.filter
             (ingreso => (new Date(ingreso.fecha_mov).getMonth() == this.periodo.indexOf(this.mes) || this.mes == "Total") && ingreso.tipo_mov == 1)
           )
@@ -61,7 +61,7 @@ export class IngresosPage implements OnInit {
     }
       
 
-      this.categoriasService.getCategorias().subscribe({
+      await this.categoriasService.getCategorias().subscribe({
         next: categorias =>{
           categorias.forEach(categoria => {
             categoria.total_cat = 0;

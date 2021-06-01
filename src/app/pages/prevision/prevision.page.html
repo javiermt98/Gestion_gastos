@@ -9,33 +9,28 @@
 
 <ion-content class="ion-padding">
   <h1>Presupuesto general</h1>
-  <ion-list>
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>Nivel de gasto por Categorías</ion-card-subtitle>
+    <ion-card-title>Gastos Anuales</ion-card-title>
+
+  </ion-card-header>
+  <ion-card-content>
+    <canvas #barChart></canvas>
+    
+  </ion-card-content>
+</ion-card>
+<div class="ion-padding">
   <ion-item>
-    <ion-label>Gastos</ion-label>
-    <ion-select [(ngModel)]="eleccion" multiple="false">
-      <ion-select-option *ngFor="let d of tiempo;" [value]="d">{{d}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item *ngIf="eleccion=='Mensual'">
     <ion-label>Mes</ion-label>
     <ion-select [(ngModel)]="mes" multiple="false" (ionChange)="filtrarprevgastos()">
       <ion-select-option *ngFor="let p of periodo;" [value]="p">{{p}}</ion-select-option>
     </ion-select>
   </ion-item>
-</ion-list>
+  <ion-item *ngFor="let c of categorias;">
+    <ion-label>{{c.nombre_cat}} = {{c.total_cat}}€</ion-label>
+  </ion-item>
+</div>
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-subtitle>Nivel de gasto por Categorías</ion-card-subtitle>
-    <ion-card-title>Gastos Totales</ion-card-title>
-
-  </ion-card-header>
-  <ion-card-content>
-    <canvas #barChart></canvas>
-    <ion-item *ngFor="let c of categorias;">
-      <ion-label>{{c.nombre_cat}} = {{c.total_cat}}€</ion-label>
-    </ion-item>
-  </ion-card-content>
-</ion-card>
 
 </ion-content>

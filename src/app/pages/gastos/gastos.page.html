@@ -21,7 +21,7 @@
 <ion-button expand="block" fill="outline" color="danger" (click)="borrando = !borrando">Borrar Movimiento</ion-button>
 </p>
   
-  <div *ngFor="let cat of categorias;" class="ion-padding divcards"> 
+  <div *ngFor="let cat of (categorias) ;" class="ion-padding divcards"> 
     <ion-card >
         <ion-item >
           <ion-icon name="{{cat.icono_cat}}" slot="start"></ion-icon>
@@ -44,6 +44,5 @@
     </ion-item>
       </ion-card>
     </div>
-
 
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { iregister } from 'src/app/pojos/iregister';
 import { RegisterService } from '../register/services/register.services';
+import nodemailer from 'nodemailer';
 
 @Component({
   selector: 'app-forgotpwd',
@@ -14,6 +15,7 @@ export class ForgotpwdPage implements OnInit {
   email:string;
   registros:iregister[];
   existe:boolean;
+  pwd:string;
 
   constructor(public registerService: RegisterService, public alertController:AlertController) { 
     this.registerService.getRegistros().subscribe({next:registro => {
@@ -30,12 +32,14 @@ export class ForgotpwdPage implements OnInit {
     console.log(this.email);
     this.registros.forEach(registro => {
       if(registro.correo_log == this.email){
+        this.pwd = registro.pwd_log;
         this.existe = true;
       }
     });
 
     if(this.existe){
       this.mailenviado();
+      this.sendemail();
     }
     else{
       this.correonoexiste();
@@ -61,6 +65,10 @@ export class ForgotpwdPage implements OnInit {
     }).then(res => {
       res.present();
     });
+  }
+
+  sendemail(){
+    
   }
 
 
