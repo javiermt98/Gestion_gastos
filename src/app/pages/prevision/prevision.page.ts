@@ -168,7 +168,7 @@ export class PrevisionPage implements OnInit {
       data: {
         labels: this.nombrecategoriasanuales,
         datasets: [{
-          label: 'Gasto en Euros',
+          label: 'Total en Euros',
           data: this.totalcategoriasanuales,
           backgroundColor: this.colorArray, 
           borderColor: 'rgb(0, 0, 0)',
