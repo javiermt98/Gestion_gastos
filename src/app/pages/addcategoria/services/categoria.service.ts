@@ -29,7 +29,7 @@ export class CategoriasService {
       this.myCon=this.DaoCateogiras.get().subscribe({
         next: categoria => {          
           this.categorias = CategoriasToAJSON(categoria);          
-          this.categorias$.next(this.categorias); // Emite evento que esta lleno !!  
+          this.categorias$.next(this.categorias); // Emite evento que esta lleno
           return this.categorias$.asObservable();
         },
         error: err => this.errorMessage = err
@@ -43,7 +43,7 @@ export class CategoriasService {
 
        this.myCon=this.DaoCateogiras.getId(id).subscribe({
         next: categoria => {
-          this.categoria$.next(categoria); // Emite evento que esta lleno !!  
+          this.categoria$.next(categoria); // Emite evento que esta lleno 
           return this.categoria$.asObservable();
         },
         error: err => this.errorMessage = err
